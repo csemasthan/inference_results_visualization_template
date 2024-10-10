@@ -433,51 +433,79 @@ function constructOpenTableModel(model, category, with_power, availability, myda
     if (with_power) {
       colspan = 8;
       colspan_single = 4;
-      model_header = `
-	<th class="col-scenario" colspan="4">Server</th>
-	<th class="col-scenario" colspan="4">Offline</th>
-	`;
+      model_header = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Server")) {
+      model_header += `<th class="col-scenario" colspan="4">Server</th>`;
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+	model_header +=	`<th class="col-scenario" colspan="4">Offline</th>`;
+      }
       //console.log(scenarioPerfUnits);
-      model_header_2 = `
+      model_header_2 = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Server")) {
+      model_header_2 += `
 	<th class="col-scenario">Accuracy</th>
 	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Server']}</th>
 	<th class="col-scenario">Samples/J</th>
+	  `;
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+      model_header_2 += `
 	<th class="col-scenario">Accuracy</th>
 	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
-      model_header_single = `
-	<th class="col-scenario" colspan="${colspan_single}">Offline</th>
+      }
+      model_header_single = ``;
+      model_header_single_2 = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+      	model_header_single +=` 
+	  <th class="col-scenario" colspan="${colspan_single}">Offline</th>
 	`;
-      model_header_single_2 = `
+      model_header_single_2 += `
 	<th class="col-scenario">Accuracy</th>
 	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
+      }
     }
     else {
       colspan = 4;
       colspan_single = 2;
-      model_header = `
-	<th class="col-scenario" colspan="2">Server</th>
-	<th class="col-scenario" colspan="2">Offline</th>
-	`;
-      model_header_2 = `
+      model_header = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Server")) {
+      model_header += `<th class="col-scenario" colspan="2">Server</th>`;
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+	model_header += `<th class="col-scenario" colspan="2">Offline</th>`;
+      }
+      model_header_2 = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Server")) {
+      	model_header_2 += `
 	<th class="col-scenario">${accuracyUnits[model]}</th>
 	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
+	  `;
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+      	model_header_2 += `
 	<th class="col-scenario">${accuracyUnits[model]}</th>
 	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	`;
-      model_header_single = `
+      }
+      model_header_single = ``;
+      model_header_single_2 = ``;
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
+      model_header_single += `
 	<th class="col-scenario">Offline</th>
 	`;
-      model_header_single_2 = `
+      model_header_single_2 += `
 	<th class="col-scenario">${accuracyUnits[model]}</th>
 	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
 	`;
+      }
     }
 
   }
