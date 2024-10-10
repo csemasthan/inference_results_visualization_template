@@ -727,10 +727,10 @@ function constructTable(category, division, with_power, availability, data) {
 	`;
       //console.log(scenarioPerfUnits);
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Server']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Server']}</th>
 	<th class="col-scenario">Samples/J</th>
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -738,7 +738,7 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario" colspan="3">Offline</th>
 	`;
       model_header_single_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -751,14 +751,14 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario">Offline</th>
 	`;
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Server']}</th>
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	`;
       model_header_single = `
 	<th class="col-scenario">Offline</th>
 	`;
       model_header_single_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	`;
     }
 
@@ -826,10 +826,10 @@ function constructTable(category, division, with_power, availability, data) {
 	`;
       //console.log(scenarioPerfUnits);
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
-	<th class="col-scenario">${scenarioPerfUnits['SingleStream']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['SingleStream']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -837,7 +837,7 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario" colspan="3">MultiStream</th>
 	`;
       model_header_ms_2 = model_header_2 + `
-	<th class="col-scenario">${scenarioPerfUnits['MultiStream']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['MultiStream']}</th>
 	<th class="col-scenario">${scenarioPowerUnits['MultiStream']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -850,14 +850,14 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario">SingleStream</th>
 	`;
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
-	<th class="col-scenario">${scenarioPerfUnits['SingleStream']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
 	`;
       model_header_ms = model_header + `
 	<th class="col-scenario">MultiStream</th>
 	`;
       model_header_ms_2 = model_header_2 + `
-	<th class="col-scenario">${scenarioPerfUnits['MultiStream']}</th>
+	<th class="col-scenario">${scenarioPerfUnits[model]['MultiStream']}</th>
 	`;
     }
     tableheader = `
