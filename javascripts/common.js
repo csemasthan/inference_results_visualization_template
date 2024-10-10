@@ -158,7 +158,7 @@ function updateScenarioUnits(data) {
             scenarioPerfUnits[item['Model']][item['Scenario']] = item['Performance_Units'];
         }
         if (item.hasOwnProperty('Power_Units')) {
-            if(!scenarioPowerUnits[item['Scenario']].hasOwnProperty('Power_Units')) {
+            if(!scenarioPowerUnits.hasOwnProperty(item['Scenario'])) {
                 scenarioPowerUnits[item['Scenario']] = item['Power_Units'];
             }
         }
