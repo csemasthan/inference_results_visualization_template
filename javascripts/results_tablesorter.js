@@ -717,6 +717,7 @@ function constructTable(category, division, with_power, availability, data) {
   html += `<thead> <tr>`
   let tableheader = ``;
   //console.log(with_power);
+  
   if (category == "datacenter") {
     if (with_power) {
       colspan = 6;
@@ -727,10 +728,10 @@ function constructTable(category, division, with_power, availability, data) {
 	`;
       //console.log(scenarioPerfUnits);
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
+	<th class="col-scenario">[SERVERPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['Server']}</th>
 	<th class="col-scenario">Samples/J</th>
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -738,7 +739,7 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario" colspan="3">Offline</th>
 	`;
       model_header_single_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -751,14 +752,14 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario">Offline</th>
 	`;
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Server']}</th>
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">[SERVERPERFUNITS]</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
 	`;
       model_header_single = `
 	<th class="col-scenario">Offline</th>
 	`;
       model_header_single_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
 	`;
     }
 
@@ -803,16 +804,13 @@ function constructTable(category, division, with_power, availability, data) {
       <th class="headcol col-system"></th>
       <th class="headcol col-submitter"></th>
       <th class="headcol col-accelerator"></th>`
+
     for(let model of models_datacenter) {
       if(model.includes("3d-unet")) {
-	tableheader += `
-	${model_header_single_2}
-	`;
+	tableheader += model_header_single_2.replace("[OFFLINEPERFUNITS]", scenarioPerfUnits[model]['Offline']);
       }
       else{
-	tableheader += `
-	${model_header_2}
-	`;
+	tableheader += model_header_2.replace("[SERVERPERFUNITS]", scenarioPerfUnits[model]['Server']).replace("[OFFLINEPERFUNITS]", scenarioPerfUnits[model]['Offline']);
       }
     }
   }
@@ -826,10 +824,10 @@ function constructTable(category, division, with_power, availability, data) {
 	`;
       //console.log(scenarioPerfUnits);
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['Offline']}</th>
 	<th class="col-scenario">Samples/J</th>
-	<th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
+	<th class="col-scenario">[SSPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['SingleStream']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -837,7 +835,7 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario" colspan="3">MultiStream</th>
 	`;
       model_header_ms_2 = model_header_2 + `
-	<th class="col-scenario">${scenarioPerfUnits[model]['MultiStream']}</th>
+	<th class="col-scenario">[MSPERFUNITS]</th>
 	<th class="col-scenario">${scenarioPowerUnits['MultiStream']}</th>
 	<th class="col-scenario">Samples/J</th>
 	`;
@@ -850,14 +848,14 @@ function constructTable(category, division, with_power, availability, data) {
 	<th class="col-scenario">SingleStream</th>
 	`;
       model_header_2 = `
-	<th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
-	<th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
+	<th class="col-scenario">[OFFLINEPERFUNITS]</th>
+	<th class="col-scenario">[SSPERFUNITS]</th>
 	`;
       model_header_ms = model_header + `
 	<th class="col-scenario">MultiStream</th>
 	`;
       model_header_ms_2 = model_header_2 + `
-	<th class="col-scenario">${scenarioPerfUnits[model]['MultiStream']}</th>
+	<th class="col-scenario">[MSPERFUNITS]</th>
 	`;
     }
     tableheader = `
@@ -903,12 +901,10 @@ function constructTable(category, division, with_power, availability, data) {
       <th class="headcol col-accelerator"></th>`;
     for(let model of models_edge) {
       if(model.includes("resnet") || model.includes("retinanet")) {
-	tableheader += `
-	${model_header_ms_2}`;
+	tableheader += model_header_ms_2.replace("[MSPERFUNITS]", scenarioPerfUnits[model]['MultiStream']).replace("[SSPERFUNITS]", scenarioPerfUnits[model]['SingleStream']).replace("[OFFLINEPERFUNITS]", scenarioPerfUnits[model]['Offline']);
       }
       else{
-	tableheader += `
-	${model_header_2}`;
+	tableheader += model_header_2.replace("[SSPERFUNITS]", scenarioPerfUnits[model]['SingleStream']).replace("[OFFLINEPERFUNITS]", scenarioPerfUnits[model]['Offline']);
       }
     }
   }
