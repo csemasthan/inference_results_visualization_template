@@ -484,7 +484,6 @@ function constructOpenTableModel(model, category, with_power, availability, myda
 	<th class="col-scenario" colspan="4">SingleStream</th>
 	`;
       }
-      //console.log(scenarioPerfUnits);
       model_header_2 = ``;
       if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
       	model_header_2 = model_header_2 + `
@@ -530,13 +529,13 @@ function constructOpenTableModel(model, category, with_power, availability, myda
       if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
 	model_header_2 = `
 	  <th class="col-scenario">${accuracyUnits[model]}</th>
-	  <th class="col-scenario">${scenarioPerfUnits['Offline']}</th>
+	  <th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	  `;
       }
       if(scenarioPerfUnits[model].hasOwnProperty("SingleStream")) {
 	model_header_2 = `
 	  <th class="col-scenario">${accuracyUnits[model]}</th>
-	  <th class="col-scenario">${scenarioPerfUnits['SingleStream']}</th>
+	  <th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
 	  `;
       }
       if(model.includes("resnet") || model.includes("retinanet")) {
@@ -546,7 +545,7 @@ function constructOpenTableModel(model, category, with_power, availability, myda
 	    `;
 	  model_header_2 = model_header_2 + `
 	    <th class="col-scenario">${accuracyUnits[model]}</th>
-	    <th class="col-scenario">${scenarioPerfUnits['MultiStream']}</th>
+	    <th class="col-scenario">${scenarioPerfUnits[model]['MultiStream']}</th>
 	    `;
 	}
       }
@@ -640,6 +639,7 @@ function constructOpenTableModel(model, category, with_power, availability, myda
   }
   else {
     html += `</table>`;
+   // html += tableposhtml;
   }
 
   //console.log(html);
