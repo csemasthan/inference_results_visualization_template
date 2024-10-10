@@ -216,7 +216,7 @@ $(document).ready(function() {
         $("#model").append('<option selected value="llama2-70b-99.9">Llama 2</option>');
         var scenarios = validScenarios["datacenter"];// getUniqueValues(myData, "Scenario");
         model = $("#model").val();
-        updateScenarioUnits(myData);
+        //updateScenarioUnits(myData);
         buildSelectOption(models, "model", model);
         buildSelectOption(scenarios, "scenario", scenario);
 

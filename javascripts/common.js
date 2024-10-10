@@ -1,4 +1,5 @@
-var scenarioUnits = {};
+var scenarioPerfUnits = {};
+var scenarioPowerUnits = {};
 var accuracyUnits = {};
 var validScenarios = {
     "edge":  [ "Offline", "SingleStream", "MultiStream" ],
@@ -151,13 +152,13 @@ function getUniqueValues(data, key) {
 
 function updateScenarioUnits(data) {
     $.each(data, function(index, item) {
-        if (!scenarioUnits.hasOwnProperty(item['Scenario'])) {
-            scenarioUnits[item['Scenario']] = {}
-            scenarioUnits[item['Scenario']]['Performance_Units'] = item['Performance_Units'];
+        if (!scenarioPerfUnits.hasOwnProperty(item['Scenario'])) {
+            scenarioPerfUnits[item['Model']] = {};
+            scenarioPerfUnits[item['Model']][item['Scenario']] = item['Performance_Units'];
         }
         if (item.hasOwnProperty('Power_Units')) {
-            if(!scenarioUnits[item['Scenario']].hasOwnProperty('Power_Units')) {
-                scenarioUnits[item['Scenario']]['Power_Units'] = item['Power_Units'];
+            if(!scenarioPowerUnits[item['Scenario']].hasOwnProperty('Power_Units')) {
+                scenarioPowerUnits[item['Scenario']] = item['Power_Units'];
             }
         }
     });
@@ -185,14 +186,14 @@ function initData(data) {
     models_datacenter = []
     models_edge = []
     data.forEach(function(item) {
-        if(item['Category'] != "closed") return;
+        //if(item['Category'] != "closed") return;
         if(item['Suite'].includes("datacenter")) {
-            if(!models_datacenter.includes(item['Model'])) {
+            if(!models_datacenter.includes(item['Model']) && models_datacenter_.includes(item['Model'])) {
                 models_datacenter.push(item['Model']);
             }
         }
         if(item['Suite'].includes("edge")) {
-            if(!models_edge.includes(item['Model'])) {
+            if(!models_edge.includes(item['Model']) && models_edge_.includes(item['Model'])) {
                 models_edge.push(item['Model']);
             }
         }
@@ -205,6 +206,7 @@ function initData(data) {
     models_edge.sort((a, b) => {
         return models_edge_.indexOf(a) - models_edge_.indexOf(b);
     });
+    updateScenarioUnits(data);
 //    console.log(models_datacenter);
   //  console.log(models_edge);
 }
