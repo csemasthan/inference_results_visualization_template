@@ -413,8 +413,10 @@ function get_scenario_td_data(data, scenario, with_power, accuracy=false) {
 function constructOpenTableModel(model, category, with_power, availability, mydata, needsFooter=false) {
   //mydata = filterModel(data, model);
 
-  html = `
+  heading = `
     <h4>${model}</h4>
+    `;
+  html = `
     <table class="resultstable tablesorter tableopen table${category}" id="results_${model}_${availability}">`;
   html += `<thead> <tr>`
   if (category == "datacenter") {
@@ -575,10 +577,12 @@ function constructOpenTableModel(model, category, with_power, availability, myda
   //console.log("here")
 
   validData = false
+  var numRows = 0;
   for (let rid in mydata) {
     if (!mydata[rid].hasOwnProperty(model)) {
       continue
     }
+    numRows +=1;
     validData = true
     let extra_sys_info = `
     Processor: ${mydata[rid].Processor}
@@ -615,19 +619,25 @@ function constructOpenTableModel(model, category, with_power, availability, myda
 
 
     if (category == "datacenter") {
-      if (!model.includes("3d-unet")) { 
+      if(scenarioPerfUnits[model].hasOwnProperty("Server")) {
 	scenario_data = get_scenario_td_data(mydata[rid][model], "Server", with_power, true);
 	html += scenario_data;
       }
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
       scenario_data = get_scenario_td_data(mydata[rid][model], "Offline", with_power, true);
       html += scenario_data;
+      }
     }
     else {
+      if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
       scenario_data = get_scenario_td_data(mydata[rid][model], "Offline", with_power, true);
       html += scenario_data;
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("SingleStream")) {
       scenario_data = get_scenario_td_data(mydata[rid][model], "SingleStream", with_power, true);
       html += scenario_data;
-      if (model.includes("retinanet") || model.includes("resnet")) {
+      }
+      if(scenarioPerfUnits[model].hasOwnProperty("MultiStream")) {
 	scenario_data = get_scenario_td_data(mydata[rid][model], "MultiStream", with_power, true);
 	html += scenario_data;
       }
@@ -639,9 +649,15 @@ function constructOpenTableModel(model, category, with_power, availability, myda
   }
   else {
     html += `</table>`;
-   // html += tableposhtml;
+    
   }
 
+  if (numRows > paginationThreshold) {
+    html =  heading + tableposhtml + html + tableposhtml;
+  }
+  else {
+    html = heading + html;
+  }
   //console.log(html);
   return html;
 }
@@ -680,7 +696,7 @@ function constructTable(category, division, with_power, availability, data) {
   if (!Object.keys(mydata).length) {
     return null; // return if mydata is null
   }
-  var needsFooter = Object.keys(mydata).length > 5;
+  var needsFooter = Object.keys(mydata).length > footerNeedThreshold;
   if(division == "open") {
     html =  constructOpenTable(category, with_power, availability, mydata);
     //console.log(html);
