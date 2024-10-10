@@ -20,6 +20,7 @@ let ver_num++
 echo "ver_num=$ver_num" > dbversion
 git add dbversion
 git commit -m "Updated dbversion"
+git push
 
 if [ ! -e docs/javascripts/config.js ]; then
     if [ -n "${INFERENCE_RESULTS_VERSION}" ]; then
