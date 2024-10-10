@@ -1,4 +1,6 @@
 $(document).ready(function() {
+sortcolumnindex = 6;
+  perfsortorder = 1;
   //tableSorterInit();
   //console.log('Document is ready');
   // if(!is_power) {
@@ -204,7 +206,15 @@ function reConstructTables(category, division, with_power, data){
     $("#modelvssubmissionchartContainer").show();
     $("#count_heading").show();
   }
-  $('table').tablesorter();
+  tableSorterInit();
+  //$('table').tablesorter();
+
+   $('table')
+    .tablesorter()
+// bind to sort events
+    .bind('tablesorter-ready', function(e, table) {
+        // do something after the 'refreshWidgets' has refreshed
+    });
   $("table").trigger("updateAll");
 }
 
