@@ -14,8 +14,8 @@ sortcolumnindex = 6;
   }).get();
 
   readAllData().then(function(allData) {
-    //console.log(allData);
-    //console.log(category+division+with_power[0]);
+    console.log(allData);
+    console.log(category+division+with_power[0]);
     reConstructTables(category, division, with_power[0], allData);
     constructChartFromSummary(allData, category, division, with_power[0]);
   }).catch(function(error) {
@@ -634,10 +634,11 @@ function constructOpenTableModel(model, category, with_power, availability, myda
     let a_num = mydata[rid]['a#'] || '';
     let acc = a_num === '' ? "" : `${mydata[rid].Accelerator} x ${parseInt(a_num)}`;
     let system_json_link = mydata[rid].Details.replace("/results/", "/systems/").replace("submissions_inference_4.0", "inference_results_v4.0") + ".json";
+    let system_info_link = mydata[rid].Details.replace("/results/", "/measurements/") + "/system_info.txt";
     html += `
       <tr>
       <td class="col-id headcol"> ${rid} </td>
-      <td class="col-system headcol" title="${extra_sys_info}"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a> </td>
+      <td class="col-system headcol" title="${extra_sys_info}"> <div class="sysinfo1 sysinfo"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a></div><div class="sysinfo2 sysinfo"><a target="_blank" href="${system_info_link}"> System Information </a></div>  </td>
       <td class="col-submitter headcol"> ${mydata[rid].Submitter} </td>
       <td class="col-accelerator headcol"> ${acc} </td>
       `;
