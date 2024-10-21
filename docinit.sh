@@ -37,6 +37,16 @@ if [ ! -e docs/thirdparty/tablesorter ]; then
     test $? -eq 0 || exit $?
 fi
 
+if [ ! -e process_results.py ]; then
+    cp docs/process_results.py .
+    test $? -eq 0 || exit $?
+fi
+
+if [ ! -e process.py ]; then
+    cp docs/process.py .
+    test $? -eq 0 || exit $?
+fi
+
 python3 process.py
 test $? -eq 0 || exit $?
 python3 process_results_table.py
