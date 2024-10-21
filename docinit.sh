@@ -37,8 +37,8 @@ if [ ! -e docs/thirdparty/tablesorter ]; then
     test $? -eq 0 || exit $?
 fi
 
-if [ ! -e process_results.py ]; then
-    cp docs/process_results.py .
+if [ ! -e process_results_table.py ]; then
+    cp docs/process_results_table.py .
     test $? -eq 0 || exit $?
 fi
 
