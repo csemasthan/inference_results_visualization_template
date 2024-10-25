@@ -82,7 +82,7 @@ def getsummarydata(data, category, division):
     mydata = {}
     mycountdata = {}
     for item in data:
-        if item['Suite'] != category:
+        if category not in item['Suite']:
             continue
         if item['Category'] != division:
             continue
@@ -132,7 +132,7 @@ def processdata(data, category, division, availability):
 
     needed_keys_system = [ "System", "Submitter", "Availability", "Category", "Accelerator", "a#", "Nodes", "Processor", "host_processors_per_node", "host_processor_core_count", "Notes", "Software", "Details", "Platform" ]
     for item in data:
-        if item['Suite'] != category:
+        if category not in item['Suite']:
             continue
         if item['Category'] != division:
             continue
@@ -169,7 +169,8 @@ def get_scenario_result(data, scenario, location_pre, result_link_text):
         extra_model_info = f"""Model precision: {data[scenario]['weight_data_types']}"""
                     
         html += f"""
-            <td class="col-result"><a target="_blank" title="{result_link_text}{extra_model_info}" href="{location_pre}{data[scenario]['Location']}"> {round(data[scenario]['Performance_Result'],1)} </a> </td>"""
+            <td class="col-result"><a target="_blank" title="{result_link_text}{extra_model_info}" href="{location_pre}{data[scenario]['Location']}"> {round(data[scenario]['Performance_Result'],1)} </a> </td>
+        """
     else:
         html += """<td class="col-result"></td>"""
 
