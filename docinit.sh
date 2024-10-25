@@ -24,8 +24,9 @@ if [ ! -e docs/javascripts/config.js ]; then
          echo "var repo_owner=\"${repo_owner}\";" >> docs/javascripts/config.js;
          echo "var repo_branch=\"${repo_branch}\";" >> docs/javascripts/config.js;
          echo "var repo_name=\"${repo_name}\";" >> docs/javascripts/config.js;
-         #ver_num=`echo ${INFERENCE_RESULTS_VERSION} | tr -cd '0-9'`
          echo "const dbVersion =\"${ver_num}\";" >> docs/javascripts/config.js;
+         echo "const default_category =\"${default_category}\";" >> docs/javascripts/config.js;
+         echo "const default_division =\"${default_division}\";" >> docs/javascripts/config.js;
     else
        echo "Please export INFERENCE_RESULTS_VERSION=v4.1 or the corresponding version";
        exit 1
