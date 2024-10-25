@@ -483,8 +483,9 @@ def generate_html_form(categories, divisions, selected_category=None, selected_d
 
 availabilities = ["Available", "Preview", "RDI" ]
 #availabilities = ["Available" ]
-division="open"
-category="edge"
+division=os.environ.get("default_division", "open")
+category=os.environ.get("default_category", "edge")
+
 html = ""
 for availability in availabilities:
     val = availability.lower()
