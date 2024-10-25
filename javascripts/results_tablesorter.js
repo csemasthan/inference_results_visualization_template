@@ -7,8 +7,8 @@ sortcolumnindex = 6;
     //     $('.power-content').hide();
     // }
   // draw initial charts
-  var category = $('#category option:selected').val();
-  var division = $('#division option:selected').val();
+  var category = default_category;
+  var division = default_division;
   var with_power = $('#with_power option:selected').map(function() {
     return $(this).val() == "true";
   }).get();
