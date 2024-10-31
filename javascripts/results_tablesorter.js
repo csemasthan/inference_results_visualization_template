@@ -111,10 +111,10 @@ function drawChartResults(){
     animationEnabled: true,
     theme: "light2",
     title: {
-      text: "Submissions per Submitter"
+      text: "Results per Submitter"
     },
     axisY: {
-      title: "Number of Submissions",
+      title: "Number of Results",
     },
     axisX: {
       title: "Submitters"
@@ -129,10 +129,10 @@ function drawChartResults(){
     animationEnabled: true,
     theme: "light2",
     title: {
-      text: "Submissions per Model"
+      text: "Results per Model"
     },
     axisY: {
-      title: "Number of Submissions",
+      title: "Number of Results",
     },
     axisX: {
       title: "Models"
@@ -640,7 +640,7 @@ function constructOpenTableModel(model, category, with_power, availability, myda
       <td class="col-id headcol"> ${rid} </td>
       <td class="col-system headcol" title="${extra_sys_info}"> <div class="sysinfo1 sysinfo"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a></div>
       `;
-      html += `<div class="sysinfo2 sysinfo"><a target="_blank" href="${system_info_link}"> More info </a></div>`;
+      html += `<div class="sysinfo2 sysinfo"><a class="moreinfourl" target="_blank" href="${system_info_link}"> More info </a></div>`;
     html += `</td>
       <td class="col-submitter headcol"> ${mydata[rid].Submitter} </td>
       <td class="col-accelerator headcol"> ${acc} </td>
