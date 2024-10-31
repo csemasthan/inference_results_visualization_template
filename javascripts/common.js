@@ -25,6 +25,26 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 async function checkLink(url) {
     try {
         const response = await fetch(url, { method: 'HEAD' });
+        if (response.ok) {
+	  //console.log("Link exists and is accessible.");
+            return true; // Status code is in the range 200-299
+        } else if (response.status === 404) {
+            //console.log("Link does not exist, 404 Not Found.");
+            return false; // Specifically handle 404 errors
+        } else {
+            console.log(`Link returned status: ${response.status}`);
+            return false; // Handle other types of bad statuses
+        }
+    } catch (error) {
+        console.error("Network error or CORS issue:", error);
+        return false; // Network error or possible CORS policy issue
+    }
+}
+
+
+async function checkLink(url) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
         return response.ok; // Returns true if status is 200-299
     } catch (error) {
         console.error("Failed to fetch URL:", error);
