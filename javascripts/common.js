@@ -22,6 +22,22 @@ repo_owner = repo_owner || "GATEOverflow";
 repo_branch = repo_branch || "main";
 const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 
+function checkLink(url) {
+    fetch(url, { method: 'HEAD' })  // Use HEAD to fetch headers only for faster response
+        .then(response => {
+            if (response.ok) {
+                console.log(`Link exists: ${url}`);
+            } else {
+                console.log(`Link does not exist: ${url}`);
+            }
+        })
+        .catch(error => {
+            console.error(`Error fetching ${url}:`, error);
+        });
+}
+
+
+
 async function fetchAndStoreData(db) {
     try {
         const data = await $.getJSON("https://raw.githubusercontent.com/" + repo_owner + "/" + repo_name + "/" + repo_branch + "/summary_results.json");
