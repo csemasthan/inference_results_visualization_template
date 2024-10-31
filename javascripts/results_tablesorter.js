@@ -640,7 +640,8 @@ function constructOpenTableModel(model, category, with_power, availability, myda
       <td class="col-id headcol"> ${rid} </td>
       <td class="col-system headcol" title="${extra_sys_info}"> <div class="sysinfo1 sysinfo"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a></div>
       `;
-    if(checkLink(system_info_link)) {
+    const exists = await checkLink(system_info_link);
+    if(exists) {
       html += `<div class="sysinfo2 sysinfo"><a target="_blank" href="${system_info_link}"> More info </a></div>`;
     }
     html += `</td>

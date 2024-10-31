@@ -42,15 +42,6 @@ async function checkLink(url) {
 }
 
 
-async function checkLink(url) {
-    try {
-        const response = await fetch(url, { method: 'HEAD' });
-        return response.ok; // Returns true if status is 200-299
-    } catch (error) {
-        console.error("Failed to fetch URL:", error);
-        throw error; // Rethrow to handle it in the calling function
-    }
-}
 
 
 async function fetchAndStoreData(db) {
