@@ -22,20 +22,15 @@ repo_owner = repo_owner || "GATEOverflow";
 repo_branch = repo_branch || "main";
 const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 
-function checkLink(url) {
-    fetch(url, { method: 'HEAD' })  // Use HEAD to fetch headers only for faster response
-        .then(response => {
-            if (response.ok) {
-                console.log(`Link exists: ${url}`);
-            } else {
-                console.log(`Link does not exist: ${url}`);
-            }
-        })
-        .catch(error => {
-            console.error(`Error fetching ${url}:`, error);
-        });
+async function checkLink(url) {
+    try {
+        const response = await fetch(url, { method: 'HEAD' });
+        return response.ok; // Returns true if status is 200-299
+    } catch (error) {
+        console.error("Failed to fetch URL:", error);
+        throw error; // Rethrow to handle it in the calling function
+    }
 }
-
 
 
 async function fetchAndStoreData(db) {
