@@ -12,7 +12,7 @@ if [ ! -e overrides ]; then
     test $? -eq 0 || exit $?
 fi
 
-repo_owner=${INFERENCE_RESULTS_REPO_OWNER:-mlcommons}
+repo_owner=${INFERENCE_RESULTS_REPO_OWNER:-mlcommons1}
 repo_branch=${INFERENCE_RESULTS_REPO_BRANCH:-main}
 repo_name=${INFERENCE_RESULTS_REPO_NAME:-inference_results_${INFERENCE_RESULTS_VERSION}}
 ver_num=$(cat dbversion)
