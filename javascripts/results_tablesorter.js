@@ -961,10 +961,11 @@ function constructTable(category, division, with_power, availability, data) {
     let a_num = mydata[rid]['a#'] || '';
     let acc = a_num === '' ? "" : `${mydata[rid].Accelerator} x ${parseInt(a_num)}`;
     let system_json_link = mydata[rid].Details.replace("results", "systems").replace("submissions_inference_4.0", "inference_results_v4.0") + ".json";
+    let system_summary_link = "https://htmlpreview.github.io/?"+mydata[rid].Details +  "summary/summary.html";
     html += `
       <tr>
       <td class="col-id headcol"> ${rid} </td>
-      <td class="col-system headcol" title="${extra_sys_info}"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a> </td>
+      <td class="col-system headcol" title="${extra_sys_info}"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a> <div class="system-summary" style="float:right"><a target="_blank" href="${system_summary_link}"> HTML Summary </a></div></td>
       <td class="col-submitter headcol"> ${mydata[rid].Submitter} </td>
       <td class="col-accelerator headcol"> ${acc} </td>
       `;
