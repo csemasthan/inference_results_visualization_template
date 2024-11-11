@@ -566,14 +566,15 @@ function constructOpenTableModel(model, category, with_power, availability, myda
 	  `;
       }
 
+      model_header_2 = ''
       if(scenarioPerfUnits[model].hasOwnProperty("Offline")) {
-	model_header_2 = `
+	model_header_2 += `
 	  <th class="col-scenario">${accuracyUnits[model]}</th>
 	  <th class="col-scenario">${scenarioPerfUnits[model]['Offline']}</th>
 	  `;
       }
       if(scenarioPerfUnits[model].hasOwnProperty("SingleStream")) {
-	model_header_2 = `
+	model_header_2 += `
 	  <th class="col-scenario">${accuracyUnits[model]}</th>
 	  <th class="col-scenario">${scenarioPerfUnits[model]['SingleStream']}</th>
 	  `;
