@@ -427,7 +427,7 @@ function constructOpenTableModel(model, category, with_power, availability, myda
     <h4>${model}</h4>
     `;
   html = `
-    <table class="resultstable tablesorter tableopen table${category}" id="results_${model}_${availability}">`;
+   <table class="resultstable tablesorter tableopen table${category}" id="results_${model}_${availability}">`;
   html += `<thead> <tr>`
   if (category == "datacenter") {
     if (with_power) {
@@ -696,11 +696,13 @@ function constructOpenTableModel(model, category, with_power, availability, myda
   }
 
   if (numRows > paginationThreshold) {
-    html =  heading + tableposhtml + html + tableposhtml;
+    tableposhtml_ = tableposhtml;
   }
   else {
-    html = heading + html;
+    tableposhtml_ = '';
   }
+  //there can be multiple open tables each with its own pagination. So, put each under a separate div
+  html =  heading + `<div class="opentable" id="open${model}">` + tableposhtml_ + html +  tableposhtml_ + "</div>";
   //console.log(html);
   return html;
 }
