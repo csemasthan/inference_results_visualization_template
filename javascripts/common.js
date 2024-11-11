@@ -5,7 +5,7 @@ var validScenarios = {
     "edge":  [ "Offline", "SingleStream", "MultiStream" ],
     "datacenter": [ "Server", "Offline" ]
 }
-var paginationThreshold = 20;
+var paginationThreshold = 10;
 var footerNeedThreshold = 8;
 models_datacenter_ = [ "llama2-70b-99", "llama2-70b-99.9", "gptj-99", "gptj-99.9", "bert-99", "bert-99.9",  "stable-diffusion-xl", "dlrm-v2-99", "dlrm-v2-99.9", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9", "rnnt"];
 

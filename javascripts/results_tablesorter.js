@@ -422,7 +422,7 @@ function get_scenario_td_data(data, scenario, with_power, accuracy=false) {
 
 function constructOpenTableModel(model, category, with_power, availability, mydata, needsFooter=false) {
   //mydata = filterModel(data, model);
-
+//console.log(mydata);
   heading = `
     <h4>${model}</h4>
     `;
@@ -622,7 +622,7 @@ function constructOpenTableModel(model, category, with_power, availability, myda
       continue
     }
     numRows +=1;
-    validData = true
+    validData = true;
     let extra_sys_info = `
     Processor: ${mydata[rid].Processor}
     Software: ${mydata[rid].Software}
@@ -1001,6 +1001,13 @@ function constructTable(category, division, with_power, availability, data) {
     html += `</tr>`;
   }
   html += "</table>";
+  
+  if (numRows > paginationThreshold) {
+    html =   tableposhtml + html + tableposhtml;
+  }
+  else {
+    
+  }
 
   //console.log(html)
 
