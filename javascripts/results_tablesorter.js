@@ -1004,7 +1004,7 @@ function constructTable(category, division, with_power, availability, data) {
   }
   html += "</table>";
   
-  if (numRows > paginationThreshold) {
+  if (mydata.length > paginationThreshold) {
     html =   tableposhtml + html + tableposhtml;
   }
   else {
