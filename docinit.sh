@@ -48,7 +48,18 @@ if [ ! -e process.py ]; then
     test $? -eq 0 || exit $?
 fi
 
+if [ ! -e add_results_summary.py ]; then
+    cp docs/add_results_summary.py .
+    test $? -eq 0 || exit $?
+fi
+
 python3 process.py
 test $? -eq 0 || exit $?
 python3 process_results_table.py
+test $? -eq 0 || exit $?
+
+git clone https://github.com/mlcommons/inference --depth=1
+test $? -eq 0 || exit $?
+
+python3 add_results_summary.py
 test $? -eq 0 || exit $?
