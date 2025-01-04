@@ -337,7 +337,9 @@ $(document).ready(function() {
         extra_filter=null;
 
         chart1title = "Performance " + charttitlesuffix;
-
+        $('#chartContainer1').show();
+	$('#printChart1').show();
+        
         if (metric === 'performance') {
             device_column_name = "Device";
             device_count_column_name = "#devices";
@@ -355,6 +357,7 @@ $(document).ready(function() {
             sortcolumnindex = 7;
             perfsortorder = 1;
             $('#chartContainer2').show();
+	    $('#printChart2').show();
         } else if (metric === 'performance_per_accelerator') {
             extra_filter = "accelerator_only";
             device_column_name = "Accelerator";
@@ -367,6 +370,7 @@ $(document).ready(function() {
                 sortcolumnindex = 7;
             }
             $('#chartContainer2').show();
+	    $('#printChart2').show();
        } else if (metric === 'performance_per_core') {
             extra_filter = "cpu_only";
             device_column_name = "Processor";
@@ -378,6 +382,7 @@ $(document).ready(function() {
                 sortcolumnindex = 7;
             }
             $('#chartContainer2').show();
+	    $('#printChart2').show();
         }   
         myData = filterData(myData, keys, values, extra_filter);
         
