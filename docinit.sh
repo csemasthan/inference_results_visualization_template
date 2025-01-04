@@ -63,3 +63,7 @@ test $? -eq 0 || exit $?
 
 python3 add_results_summary.py
 test $? -eq 0 || exit $?
+
+git add '**/summary/README.md' '**/summary/summary.html'
+git commit -m "Added results summary"
+git push
