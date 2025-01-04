@@ -1,11 +1,13 @@
-var scenarioUnits = {};
+var scenarioPerfUnits = {};
+var scenarioPowerUnits = {};
 var accuracyUnits = {};
 var validScenarios = {
     "edge":  [ "Offline", "SingleStream", "MultiStream" ],
     "datacenter": [ "Server", "Offline" ]
 }
-
-models_datacenter_ = [ "llama2-70b-99", "llama2-70b-99.9", "gptj-99", "gptj-99.9", "bert-99", "bert-99.9",  "stable-diffusion-xl", "dlrm-v2-99", "dlrm-v2-99.9", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9", "rnnt"];
+var paginationThreshold = 10;
+var footerNeedThreshold = 8;
+models_datacenter_ = [ "llama2-70b-99", "llama2-70b-99.9", "mixtral-8x7b", "gptj-99", "gptj-99.9", "bert-99", "bert-99.9",  "stable-diffusion-xl", "dlrm-v2-99", "dlrm-v2-99.9", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9", "rnnt"];
 
 models_edge_ = [ "gptj-99", "gptj-99.9", "bert-99", "stable-diffusion-xl", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9", "rnnt"];
 
@@ -19,6 +21,9 @@ repo_name = repo_name || "inference_results_"+results_version;
 repo_owner = repo_owner || "GATEOverflow";
 repo_branch = repo_branch || "main";
 const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
+
+
+
 
 async function fetchAndStoreData(db) {
     try {
@@ -151,13 +156,13 @@ function getUniqueValues(data, key) {
 
 function updateScenarioUnits(data) {
     $.each(data, function(index, item) {
-        if (!scenarioUnits.hasOwnProperty(item['Scenario'])) {
-            scenarioUnits[item['Scenario']] = {}
-            scenarioUnits[item['Scenario']]['Performance_Units'] = item['Performance_Units'];
+        if (!scenarioPerfUnits.hasOwnProperty(item['Scenario'])) {
+            scenarioPerfUnits[item['Model']] = {};
+            scenarioPerfUnits[item['Model']][item['Scenario']] = item['Performance_Units'];
         }
         if (item.hasOwnProperty('Power_Units')) {
-            if(!scenarioUnits[item['Scenario']].hasOwnProperty('Power_Units')) {
-                scenarioUnits[item['Scenario']]['Power_Units'] = item['Power_Units'];
+            if(!scenarioPowerUnits.hasOwnProperty(item['Scenario'])) {
+                scenarioPowerUnits[item['Scenario']] = item['Power_Units'];
             }
         }
     });
@@ -185,14 +190,14 @@ function initData(data) {
     models_datacenter = []
     models_edge = []
     data.forEach(function(item) {
-        if(item['Category'] != "closed") return;
+        //if(item['Category'] != "closed") return;
         if(item['Suite'].includes("datacenter")) {
-            if(!models_datacenter.includes(item['Model'])) {
+            if(!models_datacenter.includes(item['Model']) && models_datacenter_.includes(item['Model'])) {
                 models_datacenter.push(item['Model']);
             }
         }
         if(item['Suite'].includes("edge")) {
-            if(!models_edge.includes(item['Model'])) {
+            if(!models_edge.includes(item['Model']) && models_edge_.includes(item['Model'])) {
                 models_edge.push(item['Model']);
             }
         }
@@ -205,6 +210,7 @@ function initData(data) {
     models_edge.sort((a, b) => {
         return models_edge_.indexOf(a) - models_edge_.indexOf(b);
     });
+    updateScenarioUnits(data);
 //    console.log(models_datacenter);
   //  console.log(models_edge);
 }
