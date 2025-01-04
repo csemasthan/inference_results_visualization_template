@@ -75,9 +75,20 @@ th:nth-child(2), td:nth-child(2) { width: 30%; }
 """
     return html_header
 
-def get_header_table(system_json):
+def get_header_table(system_json, version):
     submitter = system_json.get('submitter')
     system_name = system_json.get('system_name')
+    division = system_json.get('division')
+    category = system_json.get('system_type')
+    status = system_json.get('status')
+
+    if status.lower() == "available":
+        availability_string = "Available as of February 2025"
+    elif status.lower() == "preview":
+        availability_string = "Preview as of February 2025, should be avaiable within 180 days"
+    else:
+        availability_string = "Research and Internal as of February 2025"
+    
     html =  f"""
 <div class="resultpage">
  <div class="titlebarcontainer">
@@ -85,7 +96,7 @@ def get_header_table(system_json):
    <a href="/" style="border: none"><img src="" alt="" /></a>
   </div>
   <div class="titlebar">
-   <h1 class="title">MLPerf Inference v5.0</h1>
+   <h1 class="title">MLPerf Inference {version}</h1>
    <p style="font-size: smaller">Copyright 2019-2025 MLCommons</p>
   </div>
  </div>
@@ -101,15 +112,15 @@ def get_header_table(system_json):
   <tbody>
    <tr>
     <th id="license_num"><a href="">MLPerf Inference Category:</a></th>
-    <td id="license_num_val">Datacenter</td>
+    <td id="license_num_val">{category}</td>
     <th id="test_date"><a href="">MLPerf Inference Division:</a></th>
-    <td id="test_date_val">Closed</td>
+    <td id="test_date_val">{division}</td>
    </tr>
    <tr>
     <th id="tester"><a href="">Submitted by:</a></th>
     <td id="tester_val">{submitter}</td>
     <th id="sw_avail"><a href="">Availability:</a></th>
-    <td id="sw_avail_val">Available as of Feb 2025</td>
+    <td id="sw_avail_val">{availability_string}</td>
    </tr>
   </tbody>
  </table>
@@ -179,8 +190,51 @@ def get_software_details_table(system_json):
     table += "</table>"
     return table
 
+def get_table_header(division, category):
+    if division == "open":
+        accuracy_achieved_header = '<td> Accuracy </td>'
+        colspan = "3"
+    else:
+        accuracy_achieved_header = "" #dont show accuracy as submitters are only expected to achieve the target
+        colspan = "2"
+
+    num_scenarios = 1
+    html_table_head = f"""
+<h3>Results Table</h3>
+<table>
+    <tr>
+        <th rowspan="2">Model</th>
+        <th rowspan="2">Accuracy Target</th>"""
+    if "datacenter" in category:
+        num_scenarios += 1
+        html_table_head += f"""
+        <th colspan="{colspan}">Server</th>"""
+
+    html_table_head += f"""
+        <th colspan="{colspan}">Offline</th>"""
+
+    if "edge" in category:
+        num_scenarios += 2
+        html_table_head += f"""
+        <th colspan="{colspan}">SingleStream</th>
+        <th colspan="{colspan}">MultiStream</th>"""
+    html_table_head += f"""
+    </tr>
+    <tr>"""
+
+    for i in range(num_scenarios):
+        html_table_head += f"""
+    {accuracy_achieved_header}
+    <td>Metric</td>
+    <td>Performance</td>"""
+
+    html_table_head += f"""
+    </tr>"""
+    return html_table_head
+
 # Initialize a dictionary to organize the data by 'Details'
 tables = {}
+version = os.environ.get('INFERENCE_RESULTS_VERSION')
 
 # Populate the dictionary with data
 for entry in data:
@@ -203,75 +257,111 @@ for entry in data:
 
 # Now you can format each group in 'tables' as a markdown table
 for details, entries in tables.items():
+            
+    details_split = details.split("/")
+    details_split[9] = "systems"
+    system = os.path.sep.join(details_split[7:11])
+    #details_split[0] = "https://raw.githubusercontent.com"
+    #system = details.replace("github.com", "raw.githubusercontent.com").replace("tree/", "refs/heads/").replace("results/", "systems/")
+    system_json_path = f"""{system}.json"""
+    system_json = get_system_json(system_json_path)
+    header_table = get_header_table(system_json, version)
+    accelerator_details = get_accelerator_details_table(system_json)
+    cpu_details = get_cpu_details_table(system_json)
+    hardware_details = get_hardware_details_table(system_json)
+    software_details = get_software_details_table(system_json)
+    network_details = get_network_details_table(system_json)
+    
     out = f"## {details}"
 
-    models_edge = [ "gptj-99", "gptj-99.9", "bert-99", "bert-99.9", "stable-diffusion-xl", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9"  ]
-    if "datacenter" in entries:
-        models = [ "llama2-70b-99", "llama2-70b-99.9", "gptj-99", "gptj-99.9", "bert-99", "bert-99.9", "stable-diffusion-xl",  "dlrm-v2-99", "dlrm-v2-99.9", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9"  ]
+    #models_edge = [ "gptj-99", "gptj-99.9", "bert-99", "bert-99.9", "stable-diffusion-xl", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9"  ]
+    #if "datacenter" in entries:
+    #    models = [ "llama2-70b-99", "llama2-70b-99.9", "gptj-99", "gptj-99.9", "bert-99", "bert-99.9", "stable-diffusion-xl",  "dlrm-v2-99", "dlrm-v2-99.9", "retinanet", "resnet", "3d-unet-99", "3d-unet-99.9"  ]
 
-    html_table_head = f"""
-<h3>Results Table</h3>
-<table>
-    <tr>
-        <th rowspan="2">Model</th>
-        <th rowspan="2">Accuracy Target</th>
-        <th colspan="2">Server</th>
-        <th colspan="2">Offline</th>
-    </tr>
-    <tr> 
-    <td>Metric</td>
-    <td>Performance</td>
-    <td>Metric</td>
-    <td>Performance</td>
-    </tr>
-    """
+    models = checker.MODEL_CONFIG[version]["models"]
+
     for category in entries:
         for division, data in entries[category].items():
-            html_table = html_table_head
-            hardware_details = ''
+    
+            html_table = get_table_header(division, category)
+            if division == "open":
+                colspan="3"
+                scenario_missing_td = "<td></td><td></td><td></td>"
+            else:
+                colspan="2"
+                scenario_missing_td = "<td></td><td></td>"
+
             for model in models:
+                        
                 if model in data:
                     html_table += f"""<tr><td>{model}</td>"""
-                    if "closed" in division:
-                        version = data[model]["Offline"]["version"]
-                        acc_target = checker.MODEL_CONFIG[version]["accuracy-target"][model]
-                        i = 0
-                        acc_targets = []
-                        key = None
-                        for item in acc_target:
-                            if i%2 == 0:
-                                key = item
-                            else:
-                                acc_targets.append( (key, item))
-                            i+=1
+                    
+                    version = data[model]["Offline"]["version"]
+                    acc_target = checker.MODEL_CONFIG[version]["accuracy-target"][model]
+                    if model in checker.MODEL_CONFIG[version]["required-scenarios-datacenter"]:
+                        required_scenarios_datacenter = checker.MODEL_CONFIG[version]["required-scenarios-datacenter"][model]
                     else:
-                        acc_targets = []
+                        required_scenarios_datacenter = []
+                    if model in checker.MODEL_CONFIG[version]["required-scenarios-edge"]:
+                        required_scenarios_edge = checker.MODEL_CONFIG[version]["required-scenarios-edge"][model]
+                    else:
+                        required_scenarios_edge = []
+
+                    i = 0
+                    acc_targets = []
+                    key = None
+                    for item in acc_target:
+                        if i%2 == 0:
+                            key = item
+                        else:
+                            acc_targets.append( (key, item))
+                        i+=1
+
                     acc_targets_list = []
                     for item in acc_targets:
                         acc_targets_list.append(f"""{item[0]}: {round(item[1], 4)}""")
                     acc_targets_string = ", ".join(acc_targets_list)
                     html_table += f"""<td>{acc_targets_string}</td>"""
-                    if "Server" in data[model]:
-                        html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{data[model]["Server"]["Performance_Result"]}</td>"""
-                    else:
-                        html_table += "<td></td><td></td>"
+
+
+                    if "datacenter" in category:
+                        if "Server" in data[model]:
+                            if division == "open":
+                                html_table += f"""<td>{data[model]["Server"]["Accuracy"]}</td>"""
+                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{data[model]["Server"]["Performance_Result"]}</td>"""
+                        else:
+                            if "Server" in required_scenarios_datacenter: #must be open
+                                html_table += scenario_missing_td
+                            else:
+                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
+
                     if "Offline" in data[model]:
-                        details_split = details.split("/")
-                        details_split[9] = "systems"
-                        system = os.path.sep.join(details_split[7:11])
-                        #details_split[0] = "https://raw.githubusercontent.com"
-                        #system = details.replace("github.com", "raw.githubusercontent.com").replace("tree/", "refs/heads/").replace("results/", "systems/")
-                        system_json_path = f"""{system}.json"""
-                        system_json = get_system_json(system_json_path)
-                        header_table = get_header_table(system_json)
-                        accelerator_details = get_accelerator_details_table(system_json)
-                        cpu_details = get_cpu_details_table(system_json)
-                        hardware_details = get_hardware_details_table(system_json)
-                        software_details = get_software_details_table(system_json)
-                        network_details = get_network_details_table(system_json)
+                        if division == "open":
+                            html_table += f"""<td>{data[model]["Offline"]["Accuracy"]}</td>"""
                         html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{data[model]["Offline"]["Performance_Result"]}</td>"""
                     else:
-                        html_table += "<td></td><td></td>"
+                        html_table += scenario_missing_td
+                    if "edge" in category:
+                        if "SingleStream" in data[model]:
+                            scenario = "SingleStream"
+                            if division == "open":
+                                html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                        else:
+                            if "MultiStream" in required_scenarios_edge: #must be open
+                                html_table += scenario_missing_td
+                            else:
+                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
+                        if "MultiStream" in data[model]:
+                            scenario = "MultiStream"
+                            if division == "open":
+                                html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                        else:
+                            if "MultiStream" in required_scenarios_edge: #must be open
+                                html_table += scenario_missing_td
+                            else:
+                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
                 else:
                     pass
                     #html_table += "<td></td> <td></td>"
@@ -295,8 +385,11 @@ for details, entries in tables.items():
             </table>
 {html_table}
 """
+            repo_name = os.environ.get('INFERENCE_RESULTS_REPO_NAME', "mlperf_inference_test_submissions_v5.0")
+            repo_branch = os.environ.get('INFERENCE_RESULTS_REPO_BRANCH', "main")
+
             readme_content = f"""
-See the HTML preview [here](https://htmlpreview.github.io/?https://github.com/mlcommons/mlperf_inference_test_submissions_v5.0/blob/main/closed/{submitter}/results/{sut_name}/summary.html)
+See the HTML preview [here](https://htmlpreview.github.io/?https://github.com/mlcommons/{repo_name}/blob/{repo_branch}/{division}/{submitter}/results/{sut_name}/summary.html)
 {html_table}
 """
             with open(out_path, "w") as f:
