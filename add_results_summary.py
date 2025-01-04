@@ -223,8 +223,7 @@ def get_table_header(division, category):
     <tr>"""
 
     for i in range(num_scenarios):
-        html_table_head += f"""
-    {accuracy_achieved_header}
+        html_table_head += f"""{accuracy_achieved_header}
     <td>Metric</td>
     <td>Performance</td>"""
 
@@ -348,7 +347,7 @@ for details, entries in tables.items():
                                 html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
                             html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
                         else:
-                            if "MultiStream" in required_scenarios_edge: #must be open
+                            if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
                             else:
                                 html_table += f"""<td colspan="{colspan}"> N/A </td>"""
@@ -387,9 +386,10 @@ for details, entries in tables.items():
 """
             repo_name = os.environ.get('INFERENCE_RESULTS_REPO_NAME', "mlperf_inference_test_submissions_v5.0")
             repo_branch = os.environ.get('INFERENCE_RESULTS_REPO_BRANCH', "main")
+            repo_owner = os.environe.get('INFERENCE_RESULTS_REPO_OWNER', 'mlcommons')
 
             readme_content = f"""
-See the HTML preview [here](https://htmlpreview.github.io/?https://github.com/mlcommons/{repo_name}/blob/{repo_branch}/{division}/{submitter}/results/{sut_name}/summary.html)
+See the HTML preview [here](https://htmlpreview.github.io/?https://github.com/{repo_owner}/{repo_name}/blob/{repo_branch}/{division}/{submitter}/results/{sut_name}/summary.html)
 {html_table}
 """
             with open(out_path, "w") as f:
