@@ -85,8 +85,8 @@ def get_header_table(system_json):
    <a href="/" style="border: none"><img src="" alt="" /></a>
   </div>
   <div class="titlebar">
-   <h1 class="title">MLPerf Inference v4.1</h1>
-   <p style="font-size: smaller">Copyright 2019-2024 MLCommons</p>
+   <h1 class="title">MLPerf Inference v5.0</h1>
+   <p style="font-size: smaller">Copyright 2019-2025 MLCommons</p>
   </div>
  </div>
  <table class="titlebarcontainer">
@@ -109,7 +109,7 @@ def get_header_table(system_json):
     <th id="tester"><a href="">Submitted by:</a></th>
     <td id="tester_val">{submitter}</td>
     <th id="sw_avail"><a href="">Availability:</a></th>
-    <td id="sw_avail_val">Available as of Aug 2024</td>
+    <td id="sw_avail_val">Available as of Feb 2025</td>
    </tr>
   </tbody>
  </table>
@@ -286,6 +286,7 @@ for details, entries in tables.items():
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
             html_table = f"""
+
 {header_table}
 <table>
             <tr><td>{accelerator_details}</td> <td>{cpu_details}</td> </tr>
@@ -294,8 +295,12 @@ for details, entries in tables.items():
             </table>
 {html_table}
 """
+            readme_content = f"""
+See the HTML preview [here](https://htmlpreview.github.io/?https://github.com/mlcommons/mlperf_inference_test_submissions_v5.0/blob/main/closed/{submitter}/results/{sut_name}/summary.html)
+{html_table}
+"""
             with open(out_path, "w") as f:
-                f.write(html_table)
+                f.write(readme_content)
             html_out_path = os.path.join(division, submitter, "results", sut_name, "summary.html")
             html_header = get_header()
             html = f"""
@@ -312,4 +317,3 @@ for details, entries in tables.items():
             #sys.exit()
     
     
-
