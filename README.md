@@ -8,4 +8,7 @@ INFERENCE_RESULTS_REPO_OWNER=${{ github.repository_owner }} bash run.sh
 
 This will copy the template code including CSS/HTML overrides and the JS files from this template repository to the docs site of the inference results repository.
 
+## Copyright
+All the code residing in this repository are copylefted unless there is an individual override in any file. 
+
 
