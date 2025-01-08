@@ -46,6 +46,9 @@ This repository handles the results and comparison pages for machine learning in
 
 - The **Compare** page is dynamically created using JavaScript. No Python code is involved in generating its HTML content.
 
+#### Third Party Libraries Needed
+- The code needs [TableSorter plugin](https://github.com/Mottie/tablesorter) for HTML table sorting and [CanvasJS](https://canvasjs.com/) for the chart rendering. 
+
 ---
 
 ### Repository Workflow
