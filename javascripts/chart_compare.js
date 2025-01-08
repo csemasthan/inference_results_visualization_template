@@ -77,7 +77,7 @@ function drawPerformanceChart(scenario, { values1, values2 }) {
             fontColor: "rgba(0,0,0,0.1)"
         }],
         axisX: {
-            labelFormatter: e => (""+e.label).substring(0, 75),
+            labelFormatter: function(e) { return (""+e.label).substring(0, 75); },
             labelAngle: 0
         },
         axisY: {
