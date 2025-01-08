@@ -77,8 +77,22 @@ function drawPerformanceChart(scenario, { values1, values2 }) {
             fontColor: "rgba(0,0,0,0.1)"
         }],
         axisX: {
-            labelFormatter: function(e) { return (""+e.label).substring(0, 75); },
-            labelAngle: 0
+            intervalType: "String",
+            valueFormatString: " ",
+            labelAngle: 35,
+            labelTextAlign: "center",
+            labelMaxWidth: 80,
+            labelFormatter: function(e) {
+                let label = e.label.toString();
+                let maxLength = 15;  // Max characters per line
+                let wrappedLabel = '';
+
+                // Wrap the label by adding \n at every maxLength interval
+                for (let i = 0; i < label.length; i += maxLength) {
+                    wrappedLabel += label.substring(i, i + maxLength) + "\n";
+                }
+                return wrappedLabel;
+            }
         },
         axisY: {
             title: ytitle[scenario],
