@@ -306,14 +306,14 @@ out_html = ""
 for key,value in content.items():
     out_html += "\n" + value
 out_html += """
-<script type="text/javascript" src="javascripts/compare_results_charts.js">
+<script type="text/javascript" src="javascripts/chart_compare.js">
 </script>
 <script type="text/javascript" src="javascripts/compare_results.js">
 </script>
 """
 
 out_html += """
-<script type="text/javascript" src="javascripts/tablesorter.js">
+<script type="text/javascript" src="javascripts/init_tablesorter.js">
 </script>
 """
 
