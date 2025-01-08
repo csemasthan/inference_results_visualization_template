@@ -77,7 +77,7 @@ function drawPerformanceChart(scenario, { values1, values2 }) {
             fontColor: "rgba(0,0,0,0.1)"
         }],
         axisX: {
-            labelFormatter: e => e.label.substring(0, 75),
+            labelFormatter: e => (""+e.label).substring(0, 75),
             labelAngle: 0
         },
         axisY: {
@@ -96,7 +96,7 @@ function drawPowerChart(scenario, { values1, values2 }) {
     charts.power[scenario] = new CanvasJS.Chart(`chartContainer${scenario}2`, {
         title: { text: "Power Comparison" },
         axisX: {
-            labelFormatter: e => e.label.substring(0, 75),
+            labelFormatter: e => (""+e.label).substring(0, 75),
             labelAngle: 0
         },
         axisY: {
@@ -114,7 +114,7 @@ function drawEfficiencyChart(scenario, { values1, values2 }) {
     charts.efficiency[scenario] = new CanvasJS.Chart(`chartContainer${scenario}3`, {
         title: { text: "Power Efficiency" },
         axisX: {
-            labelFormatter: e => e.label.substring(0, 75),
+            labelFormatter: e => (""+e.label).substring(0, 75),
             labelAngle: 0
         },
         axisY: {
