@@ -241,6 +241,7 @@ function reConstructTables(system1, sysversion1, system2, sysversion2, selected_
       // let the plugin know that we made a update, then the plugin will
       // automatically sort the table based on the header settings
       $("table").trigger("updateAll", [ resort, callback ]);
-    drawCompareCharts();
+    initializeCharts();
+    //drawCompareCharts();
 });
 }
