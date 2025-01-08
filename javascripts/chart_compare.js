@@ -64,8 +64,8 @@ function collectChartData(scenario) {
     return chartData;
 }
 
-function drawPerformanceChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(scenario, values1, values2);
+function drawPerformanceChart(scenario, { values1, values2 }, models) {
+    const chartData = createChartData(scenario, values1, values2, models);
 
     charts.performance[scenario] = new CanvasJS.Chart(`chartContainer${scenario}1`, {
         title: { text: "Performance Comparison" },
@@ -104,8 +104,8 @@ function drawPerformanceChart(scenario, { values1, values2 }) {
     charts.performance[scenario].render();
 }
 
-function drawPowerChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(scenario, values1, values2);
+function drawPowerChart(scenario, { values1, values2 }, models) {
+    const chartData = createChartData(scenario, values1, values2, models);
 
     charts.power[scenario] = new CanvasJS.Chart(`chartContainer${scenario}2`, {
         title: { text: "Power Comparison" },
@@ -122,8 +122,8 @@ function drawPowerChart(scenario, { values1, values2 }) {
     charts.power[scenario].render();
 }
 
-function drawEfficiencyChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(scenario, values1, values2);
+function drawEfficiencyChart(scenario, { values1, values2 }, models) {
+    const chartData = createChartData(scenario, values1, values2, models);
 
     charts.efficiency[scenario] = new CanvasJS.Chart(`chartContainer${scenario}3`, {
         title: { text: "Power Efficiency" },
@@ -140,19 +140,19 @@ function drawEfficiencyChart(scenario, { values1, values2 }) {
     charts.efficiency[scenario].render();
 }
 
-function createChartData(scenario, values1, values2) {
+function createChartData(scenario, values1, values2, models) {
     return [
         {
             showInLegend: true,
             type: "column",
             name: data1[scenario],
-            dataPoints: values1.map((value, index) => ({ x: index, y: value }))
+            dataPoints: values1.map((value, index) => ({ x: index, y: value, label: models[index]}))
         },
         {
             showInLegend: true,
             type: "column",
             name: data2[scenario],
-            dataPoints: values2.map((value, index) => ({ x: index, y: value }))
+            dataPoints: values2.map((value, index) => ({ x: index, y: value, label: models[index] }))
         }
     ];
 }
