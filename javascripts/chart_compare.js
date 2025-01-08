@@ -65,7 +65,7 @@ function collectChartData(scenario) {
 }
 
 function drawPerformanceChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(values1, values2);
+    const chartData = createChartData(scenario, values1, values2);
 
     charts.performance[scenario] = new CanvasJS.Chart(`chartContainer${scenario}1`, {
         title: { text: "Performance Comparison" },
@@ -91,7 +91,7 @@ function drawPerformanceChart(scenario, { values1, values2 }) {
 }
 
 function drawPowerChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(values1, values2);
+    const chartData = createChartData(scenario, values1, values2);
 
     charts.power[scenario] = new CanvasJS.Chart(`chartContainer${scenario}2`, {
         title: { text: "Power Comparison" },
@@ -109,7 +109,7 @@ function drawPowerChart(scenario, { values1, values2 }) {
 }
 
 function drawEfficiencyChart(scenario, { values1, values2 }) {
-    const chartData = createChartData(values1, values2);
+    const chartData = createChartData(scenario, values1, values2);
 
     charts.efficiency[scenario] = new CanvasJS.Chart(`chartContainer${scenario}3`, {
         title: { text: "Power Efficiency" },
@@ -126,7 +126,7 @@ function drawEfficiencyChart(scenario, { values1, values2 }) {
     charts.efficiency[scenario].render();
 }
 
-function createChartData(values1, values2) {
+function createChartData(scenario, values1, values2) {
     return [
         {
             showInLegend: true,
