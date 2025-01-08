@@ -31,7 +31,7 @@ function generateChartsForScenario(scenario) {
     if (!chartData) return;
 
     // Draw the charts
-    drawPerformanceChart(scenario, chartData.performance);
+    drawPerformanceChart(scenario, chartData.performance, chartData.modelNames);
     if (draw_power[scenario]) drawPowerChart(scenario, chartData.power);
     if (draw_power_efficiency[scenario]) drawEfficiencyChart(scenario, chartData.efficiency);
 }
@@ -79,12 +79,13 @@ function drawPerformanceChart(scenario, { values1, values2 }, models) {
         axisX: {
             intervalType: "String",
             valueFormatString: " ",
-            labelAngle: 35,
+            labelAngle: 135,
             labelTextAlign: "center",
-            labelMaxWidth: 80,
+            labelMaxWidth: 100,
             labelFormatter: function(e) {
+	        if (!e.label) return "";
                 let label = e.label.toString();
-                let maxLength = 15;  // Max characters per line
+                let maxLength = 40;  // Max characters per line
                 let wrappedLabel = '';
 
                 // Wrap the label by adding \n at every maxLength interval

@@ -40,7 +40,7 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 async function fetchAndStoreData(db) {
     try {
         const data = await $.getJSON("https://raw.githubusercontent.com/" + repo_owner + "/" + repo_name + "/" + repo_branch + "/summary_results.json");
-
+       
         // Begin a transaction to save data in IndexedDB
         const transaction = db.transaction([objStore], "readwrite");
         const objectStore = transaction.objectStore(objStore);
