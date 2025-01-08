@@ -18,6 +18,8 @@ repo_name=${INFERENCE_RESULTS_REPO_NAME:-inference_results_${INFERENCE_RESULTS_V
 ver_num=$(cat dbversion)
 let ver_num++
 
+rm -f docs/javascripts/config.js
+
 if [ ! -e docs/javascripts/config.js ]; then
     if [ -n "${INFERENCE_RESULTS_VERSION}" ]; then
          echo "const results_version=\"${INFERENCE_RESULTS_VERSION}\";" > docs/javascripts/config.js;
@@ -58,8 +60,10 @@ test $? -eq 0 || exit $?
 python3 process_results_table.py
 test $? -eq 0 || exit $?
 
-git clone https://github.com/mlcommons/inference --depth=1
-test $? -eq 0 || exit $?
+if [ ! -e inference ]; then
+    git clone https://github.com/mlcommons/inference --depth=1
+    test $? -eq 0 || exit $?
+fi
 
 python3 add_results_summary.py
 test $? -eq 0 || exit $?

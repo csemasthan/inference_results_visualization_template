@@ -107,8 +107,8 @@ var sortcolumnindex = 5, perfsortorder = 1;
 </script>
 
 <script type="text/javascript" src="javascripts/topresults.js"></script>
-<script type="text/javascript" src="javascripts/topresults_charts.js"></script>
-<script type="text/javascript" src="javascripts/tablesorter.js"></script>
+<script type="text/javascript" src="javascripts/chart_topresults.js"></script>
+<script type="text/javascript" src="javascripts/init_tablesorter.js"></script>
 
 
 </html>

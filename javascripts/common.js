@@ -1,3 +1,15 @@
+/* Copyright 2024-25 MLCommons. All Rights Reserved.
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+==============================================================================*/
+
 var scenarioPerfUnits = {};
 var scenarioPowerUnits = {};
 var accuracyUnits = {};
@@ -28,7 +40,7 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 async function fetchAndStoreData(db) {
     try {
         const data = await $.getJSON("https://raw.githubusercontent.com/" + repo_owner + "/" + repo_name + "/" + repo_branch + "/summary_results.json");
-
+       
         // Begin a transaction to save data in IndexedDB
         const transaction = db.transaction([objStore], "readwrite");
         const objectStore = transaction.objectStore(objStore);
