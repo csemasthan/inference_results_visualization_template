@@ -3,8 +3,8 @@
 * @mlcommons/wg-inference
 * @mlcommons/wg-benchmark-infra
 
-/.github/CODEOWNERS @mlcommons/staff
+/.github/CODEOWNERS @mlcommons/systems
 
-/.github/workflows/cla.yml @mlcommons/staff
+/.github/workflows/cla.yml @mlcommons/systems
 
-/LICENSE.md @mlcommons/staff
+/LICENSE.md @mlcommons/systems
