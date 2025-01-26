@@ -497,32 +497,33 @@ def get_table_header(division, category):
     <table class="table results-table">
         <tr>
             <th rowspan="2" class="th-parent">Model</th>
-            <th rowspan="2" class="th-parent">Accuracy Target</th>"""
-        if "datacenter" in category:
-            num_scenarios += 1
-            html_table_head += f"""
-            <th colspan="{colspan}">Server</th>"""
-
+            <th rowspan="2" class="th-parent">Accuracy Target</th>
+    """
+    if "datacenter" in category:
+        num_scenarios += 1
         html_table_head += f"""
-            <th colspan="{colspan}">Offline</th>"""
+        <th colspan="{colspan}">Server</th>"""
 
-        if "edge" in category:
-            num_scenarios += 2
-            html_table_head += f"""
+    html_table_head += f"""
+        <th colspan="{colspan}">Offline</th>"""
+
+    if "edge" in category:
+        num_scenarios += 2
+        html_table_head += f"""
             <th colspan="{colspan}">SingleStream</th>
             <th colspan="{colspan}">MultiStream</th>"""
             html_table_head += f"""
             </tr>
             <tr>"""
 
-        for i in range(num_scenarios):
-            html_table_head += f"""{accuracy_achieved_header}
+    for i in range(num_scenarios):
+        html_table_head += f"""{accuracy_achieved_header}
             <td>Metric</td>
             <td>Performance</td>"""
 
-            html_table_head += f"""
+    html_table_head += f"""
             </tr>"""
-            return html_table_head
+    return html_table_head
 
 # Initialize a dictionary to organize the data by 'Details'
 tables = {}
