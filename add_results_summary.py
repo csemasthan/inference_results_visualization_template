@@ -512,7 +512,7 @@ def get_table_header(division, category):
         html_table_head += f"""
             <th colspan="{colspan}">SingleStream</th>
             <th colspan="{colspan}">MultiStream</th>"""
-            html_table_head += f"""
+        html_table_head += f"""
             </tr>
             <tr>"""
 
