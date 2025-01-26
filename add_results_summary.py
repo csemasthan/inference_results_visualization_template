@@ -704,7 +704,7 @@ for details, entries in tables.items():
             html_header = get_header()
             html_footer = get_footer()
 
-                html = f"""
+            html = f"""
                 <html>
                     {html_header}
                     <body>
