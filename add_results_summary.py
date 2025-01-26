@@ -252,7 +252,7 @@ def get_header():
         </style>
     </head>
     """
-return html_header
+    return html_header
 
 def get_footer():
     html_footer = f"""
@@ -262,7 +262,7 @@ def get_footer():
         </div>
     </footer>
     """
-return html_footer
+    return html_footer
 
 def get_stripe_image():
     html_stripe_svg = f"""
@@ -284,7 +284,7 @@ def get_stripe_image():
         </svg>
     </div>
     """
-return html_stripe_svg
+    return html_stripe_svg
 
 def get_availability_string(version: str) -> str:
     """
@@ -387,7 +387,7 @@ def get_header_table(system_json, version):
             </div>
         </div>
     """
-return html
+    return html
 
 
 def get_system_json(path):
