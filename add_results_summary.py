@@ -161,6 +161,7 @@ def get_header():
         width: 100%;
         table-layout: fixed;
         color: #212529;
+        word-break: break-word;
     }
     .table-striped tbody tr:nth-of-type(odd) {
         background-color: rgba(0, 0, 0, 0.05);
@@ -193,7 +194,7 @@ def get_header():
         transform: translatey(-50%);
     }
     .th-parent,
-    .results-table tr:nth-child(3) td:nth-child(-n+2) {
+    .results-table tr:nth-child(n+3) td:nth-child(-n+2) {
         background-color: #b6bfff;
         text-align: center;
     }
