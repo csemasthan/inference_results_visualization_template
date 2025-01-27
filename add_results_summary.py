@@ -60,7 +60,7 @@ def get_header():
         border-bottom: 1px solid rgb(255 255 255 / 10%);
     }
     .topbar-container {
-        max-width: 1300px;
+        max-width: 1350px;
         padding: 0 2rem;
         margin: 0 auto;
     }
