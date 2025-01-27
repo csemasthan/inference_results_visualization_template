@@ -517,7 +517,7 @@ def round_dict_values(input_dict):
 # Function to convert a string to a dictionary
 def convert_string_to_dict(input_string):
      # Split the input string by spaces
-    items = input_string.split()
+    items = input_string.split("  ")
     
     # Initialize an empty dictionary
     result_dict = {}
