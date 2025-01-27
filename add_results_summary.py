@@ -554,7 +554,7 @@ def convert_string_to_dict(input_string):
 
 def get_table_header(division, category):
     if division == "open":
-        accuracy_achieved_header = '<td>Accuracy</td>'
+        accuracy_achieved_header = '<th>Accuracy</th>'
         colspan = "3"
     else:
         accuracy_achieved_header = "" #dont show accuracy as submitters are only expected to achieve the target
