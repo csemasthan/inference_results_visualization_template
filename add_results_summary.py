@@ -636,8 +636,8 @@ for details, entries in tables.items():
                     if "datacenter" in category:
                         if "Server" in data[model]:
                             if division == "open":
-                                html_table += f"""<td>round_to_max_5_digits({data[model]["Server"]["Accuracy"]})</td>"""
-                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model]["Server"]["Performance_Result"]})</td>"""
+                                html_table += f"""<td>{round_to_max_5_digits(data[model]["Server"]["Accuracy"])}</td>"""
+                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model]["Server"]["Performance_Result"])}</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
                                 html_table += scenario_missing_td
@@ -646,16 +646,16 @@ for details, entries in tables.items():
 
                     if "Offline" in data[model]:
                         if division == "open":
-                            html_table += f"""<td>round_to_max_5_digits({data[model]["Offline"]["Accuracy"]})</td>"""
-                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>round_to_max_5_digits({data[model]["Offline"]["Performance_Result"]})</td>"""
+                            html_table += f"""<td>{round_to_max_5_digits(data[model]["Offline"]["Accuracy"])}</td>"""
+                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{round_to_max_5_digits(data[model]["Offline"]["Performance_Result"])}</td>"""
                     else:
                         html_table += scenario_missing_td
                     if "edge" in category:
                         if "SingleStream" in data[model]:
                             scenario = "SingleStream"
                             if division == "open":
-                                html_table += f"""<td>round_to_max_5_digits({data[model][scenario]["Accuracy"]})</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model][scenario]["Performance_Result"]})</td>"""
+                                html_table += f"""<td>{round_to_max_5_digits(data[model][scenario]["Accuracy"])}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
@@ -664,8 +664,8 @@ for details, entries in tables.items():
                         if "MultiStream" in data[model]:
                             scenario = "MultiStream"
                             if division == "open":
-                                html_table += f"""<td>round_to_max_5_digits({data[model][scenario]["Accuracy"]})</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model][scenario]["Performance_Result"]})</td>"""
+                                html_table += f"""<td>{round_to_max_5_digits(data[model][scenario]["Accuracy"])}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
