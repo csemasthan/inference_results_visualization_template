@@ -619,7 +619,7 @@ for details, entries in tables.items():
                         if "Server" in data[model]:
                             if division == "open":
                                 html_table += f"""<td>{data[model]["Server"]["Accuracy"]}</td>"""
-                                html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{data[model]["Server"]["Performance_Result"]}</td>"""
+                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{data[model]["Server"]["Performance_Result"]}</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
                                 html_table += scenario_missing_td
