@@ -76,8 +76,8 @@ def get_header():
         margin: 0 auto;
     }
     .titlebarcontainer {
-        margin-top: 20vh;
-        margin-bottom: 20vh;
+        margin-top: 6vh;
+        margin-bottom: 6vh;
     }
     .main-title {
         font-size: 3rem;
@@ -221,8 +221,8 @@ def get_header():
             padding: 0;
         }
         .titlebarcontainer {
-            margin-top: 15vh;
-            margin-bottom: 10vh;
+            margin-top: 8vh;
+            margin-bottom: 6vh;
         }
         .main-title {
             font-size: 2rem;
