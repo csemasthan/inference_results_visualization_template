@@ -495,7 +495,7 @@ def get_table_header(division, category):
         html_table_head += f"""<th colspan="{colspan}">SingleStream</th>
 <th colspan="{colspan}">MultiStream</th>
 """
-        html_table_head += f"""</tr>
+    html_table_head += f"""</tr>
 <tr>
 """
 
@@ -517,7 +517,7 @@ for entry in data:
     details = entry['Details']
     if details not in tables:
         tables[details] = {}
-        categories = [ "edge", "datacenter" ]
+    categories = [ "edge", "datacenter" ]
     for category in categories:
         if category not in entry['Suite']:
             continue
@@ -596,8 +596,8 @@ for details, entries in tables.items():
                     acc_targets_list = []
                     for item in acc_targets:
                         acc_targets_list.append(f"""{item[0]}: {round(item[1], 4)}""")
-                        acc_targets_string = ", ".join(acc_targets_list)
-                        html_table += f"""<td>{acc_targets_string}</td>"""
+                    acc_targets_string = ", ".join(acc_targets_list)
+                    html_table += f"""<td>{acc_targets_string}</td>"""
 
                     if "datacenter" in category:
                         if "Server" in data[model]:
@@ -613,7 +613,7 @@ for details, entries in tables.items():
                     if "Offline" in data[model]:
                         if division == "open":
                             html_table += f"""<td>{data[model]["Offline"]["Accuracy"]}</td>"""
-                            html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{data[model]["Offline"]["Performance_Result"]}</td>"""
+                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{data[model]["Offline"]["Performance_Result"]}</td>"""
                     else:
                         html_table += scenario_missing_td
                     if "edge" in category:
@@ -621,7 +621,7 @@ for details, entries in tables.items():
                             scenario = "SingleStream"
                             if division == "open":
                                 html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
-                                html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
@@ -631,7 +631,7 @@ for details, entries in tables.items():
                             scenario = "MultiStream"
                             if division == "open":
                                 html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
-                                html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
