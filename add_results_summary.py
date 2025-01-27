@@ -525,10 +525,25 @@ def convert_string_to_dict(input_string):
     # Iterate through the items, taking each pair of key and value
     for item in items:
         # Split each item into key and value at the colon
-        key, value = item.split(':')
+        key_value = item.split(':')
         
-        # Strip any extra whitespace and convert the value to a float
-        result_dict[key.strip()] = float(value.strip())
+        # Ensure there are exactly two parts (key and value)
+        if len(key_value) == 2:
+            key, value = key_value
+            # Strip any extra whitespace
+            key = key.strip()
+            value = value.strip()
+            
+            # Check if the value is not empty, then convert it to float
+            if value:
+                try:
+                    result_dict[key] = float(value)
+                except ValueError:
+                    print(f"Warning: Could not convert '{value}' to float. Skipping this entry.")
+            else:
+                print(f"Warning: Empty value found for '{key}'. Skipping this entry.")
+        else:
+            print(f"Warning: Invalid format for item '{item}'. Skipping this entry.")
     
     return result_dict
 
