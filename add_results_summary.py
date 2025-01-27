@@ -341,8 +341,7 @@ def get_header_table(system_json, version):
     else:
         availability_string = f"""Research and Internal {availability_string}"""
     
-    html =  f"""
-<div class="titlebarcontainer">
+    html =  f"""<div class="titlebarcontainer">
 <div class="titlebar">
 <h1 class="main-title">MLPerf Inference {version}</h1>
 <p class="main-title-description">Copyright 2019 - 2025 MLCommons</p>
@@ -393,8 +392,7 @@ def get_system_json(path):
 
 def get_accelerator_details_table(system_json):
     html_stripe_svg = get_stripe_image()
-    table = f"""
-{html_stripe_svg}
+    table = f"""{html_stripe_svg}
 <h3>Accelerator Details</h3>
 <div class="table-container">
 <table class="table">
@@ -486,28 +484,28 @@ def get_table_header(division, category):
 """
     if "datacenter" in category:
         num_scenarios += 1
-        html_table_head += f"""
-        <th colspan="{colspan}">Server</th>"""
+        html_table_head += f"""<th colspan="{colspan}">Server</th>
+"""
 
-    html_table_head += f"""
-        <th colspan="{colspan}">Offline</th>"""
+    html_table_head += f"""<th colspan="{colspan}">Offline</th>
+"""
 
     if "edge" in category:
         num_scenarios += 2
-        html_table_head += f"""
-            <th colspan="{colspan}">SingleStream</th>
-            <th colspan="{colspan}">MultiStream</th>"""
-        html_table_head += f"""
-            </tr>
-            <tr>"""
+        html_table_head += f"""<th colspan="{colspan}">SingleStream</th>
+<th colspan="{colspan}">MultiStream</th>
+"""
+        html_table_head += f"""</tr>
+<tr>
+"""
 
     for i in range(num_scenarios):
         html_table_head += f"""{accuracy_achieved_header}
-            <td>Metric</td>
-            <td>Performance</td>"""
+<td>Metric</td>
+<td>Performance</td>
+"""
 
-    html_table_head += f"""
-            </tr>"""
+    html_table_head += f"""</tr>"""
     return html_table_head
 
 # Initialize a dictionary to organize the data by 'Details'
