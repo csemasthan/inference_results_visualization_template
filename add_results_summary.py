@@ -451,6 +451,7 @@ def get_network_details_table(system_json):
 
     table += "</table></div>"
     return table
+    
 def get_hardware_details_table(system_json):
     html_stripe_svg = get_stripe_image()
     table = f"""{html_stripe_svg}
@@ -497,6 +498,30 @@ def round_to_max_5_digits(number):
             return round(number, 5)
     
     return number
+
+def round_dict_values(input_dict):
+    """
+    Takes a dictionary and rounds all numeric values (integers or floats) to max 5 decimal places.
+    
+    Args:
+        input_dict (dict): A dictionary where the values are numbers.
+        
+    Returns:
+        dict: A new dictionary with the values rounded to max 5 decimal places.
+    """
+     if isinstance(input_dict, str):
+        input_dict = convert_string_to_dict(input_dict)
+    return {key: round_to_max_5_digits(value) for key, value in input_dict.items()}
+
+
+# Function to convert a string to a dictionary
+def convert_string_to_dict(dict_string):
+    try:
+        # Safely evaluate the string into a dictionary
+        return ast.literal_eval(dict_string)
+    except Exception as e:
+        print(f"Error: Could not convert string to dictionary: {e}")
+        return {}
 
 def get_table_header(division, category):
     if division == "open":
@@ -636,7 +661,7 @@ for details, entries in tables.items():
                     if "datacenter" in category:
                         if "Server" in data[model]:
                             if division == "open":
-                                html_table += f"""<td>{round_to_max_5_digits(data[model]["Server"]["Accuracy"])}</td>"""
+                                html_table += f"""<td>{round_dict_values(data[model]["Server"]["Accuracy"])}</td>"""
                             html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model]["Server"]["Performance_Result"])}</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
@@ -646,7 +671,7 @@ for details, entries in tables.items():
 
                     if "Offline" in data[model]:
                         if division == "open":
-                            html_table += f"""<td>{round_to_max_5_digits(data[model]["Offline"]["Accuracy"])}</td>"""
+                            html_table += f"""<td>{round_dict_values(data[model]["Offline"]["Accuracy"])}</td>"""
                         html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{round_to_max_5_digits(data[model]["Offline"]["Performance_Result"])}</td>"""
                     else:
                         html_table += scenario_missing_td
@@ -654,7 +679,7 @@ for details, entries in tables.items():
                         if "SingleStream" in data[model]:
                             scenario = "SingleStream"
                             if division == "open":
-                                html_table += f"""<td>{round_to_max_5_digits(data[model][scenario]["Accuracy"])}</td>"""
+                                html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
                             html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
@@ -664,7 +689,7 @@ for details, entries in tables.items():
                         if "MultiStream" in data[model]:
                             scenario = "MultiStream"
                             if division == "open":
-                                html_table += f"""<td>{round_to_max_5_digits(data[model][scenario]["Accuracy"])}</td>"""
+                                html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
                             html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
