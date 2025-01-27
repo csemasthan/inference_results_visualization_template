@@ -265,25 +265,24 @@ def get_footer():
     return html_footer
 
 def get_stripe_image():
-    html_stripe_svg = f"""
-    <div class="yellow-strip floater" data-speed="0.1" style="transform: translate3d(0px, 19px, 0px);">
-        <svg role="presentation" aria-hidden="true" width="83" height="21" viewBox="0 0 83 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0 0L0 3.42863L3.24487 0L0 0Z" fill="#FBBC04"></path>
-            <path d="M8.29399 0L0 8.76368L0 12.202L11.5481 0L8.29399 0Z" fill="#FBBC04"></path>
-            <path d="M16.5972 0L0 17.5371L0 20.9754L19.8513 0L16.5972 0Z" fill="#FBBC04"></path>
-            <path d="M24.9016 0L5.02734 20.9998H8.28142L28.1557 0L24.9016 0Z" fill="#FBBC04"></path>
-            <path d="M33.2024 0L13.3281 20.9998H16.5822L36.4565 0L33.2024 0Z" fill="#FBBC04"></path>
-            <path d="M41.5071 0L21.6328 20.9998H24.8869L44.7611 0L41.5071 0Z" fill="#FBBC04"></path>
-            <path d="M49.8079 0L29.9336 20.9998H33.1923L53.0619 0L49.8079 0Z" fill="#FBBC04"></path>
-            <path d="M58.1119 0L38.2422 20.9998H41.4963L61.3659 0L58.1119 0Z" fill="#FBBC04"></path>
-            <path d="M66.4165 0L46.5469 20.9998H49.801L69.6706 0L66.4165 0Z" fill="#FBBC04"></path>
-            <path d="M74.7212 0L54.8516 20.9998H58.1056L77.9753 0L74.7212 0Z" fill="#FBBC04"></path>
-            <path d="M66.4064 20.9989L82.999 3.4618V0.0234375L63.1523 20.9989H66.4064Z" fill="#FBBC04"></path>
-            <path d="M74.7111 20.9989L83.0005 12.2352V8.79688L71.457 20.9989H74.7111Z" fill="#FBBC04"></path>
-            <path d="M82.9981 20.9989V17.5703L79.7578 20.9989H82.9981Z" fill="#FBBC04"></path>
-        </svg>
-    </div>
-    """
+    html_stripe_svg = f"""<div class="yellow-strip floater" data-speed="0.1" style="transform: translate3d(0px, 19px, 0px);">
+<svg role="presentation" aria-hidden="true" width="83" height="21" viewBox="0 0 83 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 0L0 3.42863L3.24487 0L0 0Z" fill="#FBBC04"></path>
+<path d="M8.29399 0L0 8.76368L0 12.202L11.5481 0L8.29399 0Z" fill="#FBBC04"></path>
+<path d="M16.5972 0L0 17.5371L0 20.9754L19.8513 0L16.5972 0Z" fill="#FBBC04"></path>
+<path d="M24.9016 0L5.02734 20.9998H8.28142L28.1557 0L24.9016 0Z" fill="#FBBC04"></path>
+<path d="M33.2024 0L13.3281 20.9998H16.5822L36.4565 0L33.2024 0Z" fill="#FBBC04"></path>
+<path d="M41.5071 0L21.6328 20.9998H24.8869L44.7611 0L41.5071 0Z" fill="#FBBC04"></path>
+<path d="M49.8079 0L29.9336 20.9998H33.1923L53.0619 0L49.8079 0Z" fill="#FBBC04"></path>
+<path d="M58.1119 0L38.2422 20.9998H41.4963L61.3659 0L58.1119 0Z" fill="#FBBC04"></path>
+<path d="M66.4165 0L46.5469 20.9998H49.801L69.6706 0L66.4165 0Z" fill="#FBBC04"></path>
+<path d="M74.7212 0L54.8516 20.9998H58.1056L77.9753 0L74.7212 0Z" fill="#FBBC04"></path>
+<path d="M66.4064 20.9989L82.999 3.4618V0.0234375L63.1523 20.9989H66.4064Z" fill="#FBBC04"></path>
+<path d="M74.7111 20.9989L83.0005 12.2352V8.79688L71.457 20.9989H74.7111Z" fill="#FBBC04"></path>
+<path d="M82.9981 20.9989V17.5703L79.7578 20.9989H82.9981Z" fill="#FBBC04"></path>
+</svg>
+</div>
+"""
     return html_stripe_svg
 
 def get_availability_string(version: str) -> str:
