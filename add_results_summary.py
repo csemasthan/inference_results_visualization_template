@@ -481,6 +481,23 @@ def get_software_details_table(system_json):
     table += "</table></div>"
     return table
 
+def round_to_max_5_digits(number):
+    # Ensure the input is a float (if it's a string, convert it)
+    if isinstance(number, str):
+        number = float(number)
+
+    # Convert the number to a string to check its decimal part
+    number_str = f"{number:.10f}".rstrip('0').rstrip('.')
+    
+    if '.' in number_str:
+        # Split into integer and decimal parts
+        integer_part, decimal_part = number_str.split('.')
+        # Check if decimal part exceeds 5 digits
+        if len(decimal_part) > 5:
+            return round(number, 5)
+    
+    return number
+
 def get_table_header(division, category):
     if division == "open":
         accuracy_achieved_header = '<td>Accuracy</td>'
@@ -619,8 +636,8 @@ for details, entries in tables.items():
                     if "datacenter" in category:
                         if "Server" in data[model]:
                             if division == "open":
-                                html_table += f"""<td>{data[model]["Server"]["Accuracy"]}</td>"""
-                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{data[model]["Server"]["Performance_Result"]}</td>"""
+                                html_table += f"""<td>round_to_max_5_digits({data[model]["Server"]["Accuracy"]})</td>"""
+                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model]["Server"]["Performance_Result"]})</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
                                 html_table += scenario_missing_td
@@ -629,16 +646,16 @@ for details, entries in tables.items():
 
                     if "Offline" in data[model]:
                         if division == "open":
-                            html_table += f"""<td>{data[model]["Offline"]["Accuracy"]}</td>"""
-                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{data[model]["Offline"]["Performance_Result"]}</td>"""
+                            html_table += f"""<td>round_to_max_5_digits({data[model]["Offline"]["Accuracy"]})</td>"""
+                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>round_to_max_5_digits({data[model]["Offline"]["Performance_Result"]})</td>"""
                     else:
                         html_table += scenario_missing_td
                     if "edge" in category:
                         if "SingleStream" in data[model]:
                             scenario = "SingleStream"
                             if division == "open":
-                                html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                                html_table += f"""<td>round_to_max_5_digits({data[model][scenario]["Accuracy"]})</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model][scenario]["Performance_Result"]})</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
@@ -647,8 +664,8 @@ for details, entries in tables.items():
                         if "MultiStream" in data[model]:
                             scenario = "MultiStream"
                             if division == "open":
-                                html_table += f"""<td>{data[model][scenario]["Accuracy"]}</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{data[model][scenario]["Performance_Result"]}</td>"""
+                                html_table += f"""<td>round_to_max_5_digits({data[model][scenario]["Accuracy"]})</td>"""
+                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>round_to_max_5_digits({data[model][scenario]["Performance_Result"]})</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
