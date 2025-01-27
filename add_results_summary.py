@@ -475,7 +475,8 @@ def get_table_header(division, category):
         colspan = "2"
 
     num_scenarios = 1
-    html_table_head = f"""
+    html_stripe_svg = get_stripe_image()
+    html_table_head = f"""{html_stripe_svg}
 <h3>Results Table</h3>
 <div class="table-container">
 <table class="table results-table">
@@ -682,7 +683,7 @@ for details, entries in tables.items():
 <div class="table-wrapper">{software_details}</div>
 </div>
 <div class="table-full table-striped">
-{html_table}
+<div class="table-wrapper">{html_table}</div>
 </div>
 </div>
 </main>
