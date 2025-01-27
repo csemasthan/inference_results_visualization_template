@@ -589,8 +589,8 @@ def get_table_header(division, category):
 
     for i in range(num_scenarios):
         html_table_head += f"""{accuracy_achieved_header}
-<td>Metric</td>
-<td>Performance</td>
+<th>Metric</th>
+<th>Performance</th>
 """
 
     html_table_head += f"""</tr>"""
