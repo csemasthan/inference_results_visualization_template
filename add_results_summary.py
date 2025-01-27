@@ -516,7 +516,7 @@ def round_dict_values(input_dict):
     """
     if isinstance(input_dict, str):
         input_dict = convert_string_to_dict(input_dict)
-    return ", ".join(f"{key}:{round_to_max_5_digits(value)}" for key, value in input_dict.items())
+    return ", ".join(f"{key}: {round_to_max_5_digits(value)}" for key, value in input_dict.items())
 
 
 # Function to convert a string to a dictionary
