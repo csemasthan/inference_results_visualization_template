@@ -654,7 +654,7 @@ for details, entries in tables.items():
             out_path = os.path.join(division, submitter, "results", sut_name, "README.md")
             os.makedirs(os.path.dirname(out_path), exist_ok=True)
 
-             html_table = f"""
+            html_table = f"""
 <header class="topbar">
 <div class="topbar-container">
 <div class="logo">
