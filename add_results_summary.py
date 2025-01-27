@@ -515,13 +515,22 @@ def round_dict_values(input_dict):
 
 
 # Function to convert a string to a dictionary
-def convert_string_to_dict(dict_string):
-    try:
-        # Safely evaluate the string into a dictionary
-        return ast.literal_eval(dict_string)
-    except Exception as e:
-        print(f"Error: Could not convert string to dictionary: {e}")
-        return {}
+def convert_string_to_dict(input_string):
+     # Split the input string by spaces
+    items = input_string.split()
+    
+    # Initialize an empty dictionary
+    result_dict = {}
+    
+    # Iterate through the items, taking each pair of key and value
+    for item in items:
+        # Split each item into key and value at the colon
+        key, value = item.split(':')
+        
+        # Strip any extra whitespace and convert the value to a float
+        result_dict[key.strip()] = float(value.strip())
+    
+    return result_dict
 
 def get_table_header(division, category):
     if division == "open":
