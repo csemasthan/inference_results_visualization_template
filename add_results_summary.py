@@ -509,7 +509,7 @@ def round_dict_values(input_dict):
     Returns:
         dict: A new dictionary with the values rounded to max 5 decimal places.
     """
-     if isinstance(input_dict, str):
+    if isinstance(input_dict, str):
         input_dict = convert_string_to_dict(input_dict)
     return {key: round_to_max_5_digits(value) for key, value in input_dict.items()}
 
