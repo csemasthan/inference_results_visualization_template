@@ -593,10 +593,10 @@ def convert_string_to_dict(input_string):
     return result_dict
 
 def get_button_links(system, division):
-    code_link = system.replace("system", "code")
-    results_link = system.replace("system", "results")
-    measurements_link = system.replace("system", "measurements")
-    compliance_link = system.replace("system", "compliance")
+    code_link = system.replace("results", "code")
+    results_link = system
+    measurements_link = system.replace("results", "measurements")
+    compliance_link = system.replace("results", "compliance")
 
     html = f"""<div class="button-container">
 <a href="{code_link}" class="button">Code</a>
@@ -702,7 +702,7 @@ for details, entries in tables.items():
 
     for category in entries:
         for division, data in entries[category].items():
-            button_links = get_button_links(system, division) 
+            button_links = get_button_links(details, division) 
             html_table = get_table_header(division, category)
             if division == "open":
                 colspan="3"
