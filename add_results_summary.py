@@ -565,8 +565,9 @@ def get_button_links(system, division):
 """
     if division == "closed":
         html += f"""<a href="{compliance_link}" class="button">Compliance</a>
-</div>
 """
+    html +="""</div>"""
+
     return html
 
 def get_table_header(division, category):
