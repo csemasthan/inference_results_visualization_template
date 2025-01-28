@@ -552,6 +552,23 @@ def convert_string_to_dict(input_string):
     
     return result_dict
 
+def get_button_links(system, division):
+    code_link = system.replace("system", "code")
+    results_link = system.replace("system", "results")
+    measurements_link = system.replace("system", "measurements")
+    compliance_link = system.replace("system", "compliance")
+
+    html = f"""<div class="button-container">
+<a href="{code_link}" class="button">Code</a>
+<a href="{results_link}" class="button">Result Logs</a>
+<a href="{measurements_link}" class="button">Measurements</a>
+"""
+    if division == "closed":
+        html += f"""<a href="{compliance_link}" class="button">Compliance</a>
+</div>
+"""
+    return html
+
 def get_table_header(division, category):
     if division == "open":
         accuracy_achieved_header = '<th>Accuracy</th>'
@@ -625,8 +642,6 @@ for details, entries in tables.items():
     details_split = details.split("/")
     details_split[9] = "systems"
     system = os.path.sep.join(details_split[7:11])
-    #details_split[0] = "https://raw.githubusercontent.com"
-    #system = details.replace("github.com", "raw.githubusercontent.com").replace("tree/", "refs/heads/").replace("results/", "systems/")
     system_json_path = f"""{system}.json"""
     system_json = get_system_json(system_json_path)
     header_table = get_header_table(system_json, version)
@@ -646,7 +661,7 @@ for details, entries in tables.items():
 
     for category in entries:
         for division, data in entries[category].items():
-    
+            button_links = get_button_links(system, division) 
             html_table = get_table_header(division, category)
             if division == "open":
                 colspan="3"
@@ -754,6 +769,9 @@ for details, entries in tables.items():
 <div class="welcome-section">
 <div class="welcome-section-wrapper">
 {header_table}
+</div>
+<div class="welcome-section-wrapper">
+{button_links}
 </div>
 </div>
 <div class="details-container">
