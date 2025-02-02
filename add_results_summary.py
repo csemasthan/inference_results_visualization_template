@@ -158,6 +158,16 @@ def get_header():
         font-weight: bold;
         margin-right: 6px;
     }
+    .titlebar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .date-right {
+    font-size: 14px;
+    color: gray;
+  }
 
     .table-half {
         width: 100%;
@@ -399,6 +409,7 @@ def get_header_table(system_json, version):
     category = system_json.get('system_type')
     status = system_json.get('status')
 
+    '''
     availability_string = get_availability_string(version)
     if status.lower() == "available":
         availability_string = f"""Available {availability_string}"""
@@ -406,10 +417,13 @@ def get_header_table(system_json, version):
         availability_string = f"""Preview {availability_string}, should be avaiable within 180 days"""
     else:
         availability_string = f"""Research and Internal {availability_string}"""
-    
+    '''
+    availability_string = status
+
     html =  f"""<div class="titlebarcontainer">
 <div class="titlebar">
 <h1 class="main-title">MLPerf Inference {version}</h1>
+<span class="date-right">{month} {year}</span>
 <p class="main-title-description">Copyright 2019 - 2025 MLCommons</p>
 </div>
 </div>
