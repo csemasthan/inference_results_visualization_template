@@ -458,13 +458,18 @@ def get_system_json(path):
 
 def get_accelerator_details_table(system_json):
     html_stripe_svg = get_stripe_image()
+    main_keys = [ "accelerator_model_name", "accelerators_per_node", "accelerator_memory_capacity", "accelerator_host_interconnect" ]
     table = f"""{html_stripe_svg}
 <h3>Accelerator Details</h3>
 <div class="table-container">
 <table class="table">
 """
+    for key in main_keys:
+        if key in system_json:
+            value = system_json[key]
+            table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
     for key,value in system_json.items():
-        if not key.startswith("accelerator"):
+        if not key.startswith("accelerator") and key not in main_keys:
             continue
         table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
 
