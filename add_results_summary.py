@@ -219,6 +219,10 @@ def get_header():
     .table-full .table:not(.results-table) th, .table-full .table:not(.results-table) td {
         width: 50%;
     }
+    a.button {
+    color: black;
+    background-color: azure;
+    }
     .table th:not(:last-child), .table td:not(:last-child) {
         position: relative;
     }
@@ -235,12 +239,12 @@ def get_header():
     }
     .th-parent,
     .results-table tr:nth-child(n+3) td:nth-child(-n+2) {
-        background-color: #b6bfff;
+        background-color: #dddee3;
         text-align: center;
     }
     /* Apply styling to the first two columns of rows starting from the third row */
 .results-table th, .results-table tr:nth-child(n+3) td:nth-child(-n+2) {
-    background-color: #b6bfff;
+    background-color: #dddee3;
     text-align: center;
 }
 
