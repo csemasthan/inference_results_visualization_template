@@ -419,21 +419,21 @@ def get_header_table(system_json, version):
 <div class="test-details-container table-half">
 <div class="test-details">
 <div class="details-group">
-<span id="license_num" class="details-cell"><a href="">MLPerf Inference Category:</a></span>
+<span id="license_num" class="details-cell"><a href="https://github.com/mlcommons/inference/blob/master/README.md">MLPerf Inference Category:</a></span>
 <span id="license_num_val" class="details-cell">{category}</span>
 </div>
 <div class="details-group">
-<span id="sw_avail" class="details-cell"><a href="">Availability:</a></span>
+<span id="sw_avail" class="details-cell"><a href="https://github.com/mlcommons/policies/blob/master/submission_rules.adoc#results-categories">Availability:</a></span>
 <span id="sw_avail_val" class="details-cell">{availability_string}</span>
 </div>
 </div>
 <div class="test-details">
 <div class="details-group">
-<span id="tester" class="details-cell"><a href="">Submitted by:</a></span>
+<span id="tester" class="details-cell">Submitted by:</span>
 <span id="tester_val" class="details-cell">{submitter}</span>
 </div>
 <div class="details-group">
-<span id="test_date" class="details-cell"><a href="">MLPerf Inference Division:</a></span>
+<span id="test_date" class="details-cell"><a href="https://github.com/mlcommons/inference_policies/blob/master/inference_rules.adoc#divisions">MLPerf Inference Division:</a></span>
 <span id="test_date_val" class="details-cell">{division}</span>
 </div>
 </div>
@@ -469,7 +469,7 @@ def get_accelerator_details_table(system_json):
             value = system_json[key]
             table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
     for key,value in system_json.items():
-        if not key.startswith("accelerator") and key not in main_keys:
+        if not key.startswith("accelerator") or key not in main_keys:
             continue
         table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
 
@@ -478,14 +478,20 @@ def get_accelerator_details_table(system_json):
 
 def get_cpu_details_table(system_json):
     html_stripe_svg = get_stripe_image()
+    main_keys = [ "host_processor_model_name", "host_processors_per_node", "host_processor_core_count", "host_processor_frequency" ]
     table = f"""{html_stripe_svg}
 <h3>Processor and Memory Details</h3>
 <div class="table-container">
 <table class="table">
 """
+     for key in main_keys:
+        if key in system_json:
+            value = system_json[key]
+            table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
+            
     hardware_fields = [ "processor", "cpu", "memory" ]
     for key,value in system_json.items():
-        if any (a in key for a in hardware_fields) and "accelerator" not in key:
+        if any (a in key for a in hardware_fields) and "accelerator" not in key and key not in main_keys:
             table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
 
     table += "</table></div>"
