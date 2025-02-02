@@ -424,8 +424,8 @@ def get_header_table(system_json, version):
     html =  f"""<div class="titlebarcontainer">
 <div class="titlebar">
 <h1 class="main-title">MLPerf Inference {version}</h1>
-<span class="date-right">{month} {year}</span>
 <p class="main-title-description">Copyright 2019 - 2025 MLCommons</p>
+<span class="date-right">{month} {year}</span>
 </div>
 </div>
 <div class="table table-full submittertitle">
