@@ -362,15 +362,15 @@ def get_stripe_image():
 """
     return html_stripe_svg
 
-def get_availability_string(version: str) -> str:
+def get_month_year(version: str) -> str:
     """
-    Generate availability string based on the version.
+    Generate month, year of submission based on the version.
     
     Args:
         version (str): Version string (e.g., 'v1.0', 'v1.1', 'v2.0', ..., 'v9.1')
         
     Returns:
-        str: Availability string (e.g., "Available as of February 2024")
+        str: month, str: year
     """
     # Define version-to-month mapping
     version_month_map = {
@@ -396,7 +396,7 @@ def get_availability_string(version: str) -> str:
         year = 2021 + (major - 1)
         month = version_month_map[minor]
         
-        return f" as of {month} {year}"
+        return month, year
     
     except (ValueError, IndexError) as e:
         return f"Error: Invalid version format - {e}"
@@ -419,6 +419,7 @@ def get_header_table(system_json, version):
         availability_string = f"""Research and Internal {availability_string}"""
     '''
     availability_string = status
+    month, year = get_month_year(version)
 
     html =  f"""<div class="titlebarcontainer">
 <div class="titlebar">
