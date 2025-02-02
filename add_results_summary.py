@@ -49,7 +49,9 @@ def get_header():
         overflow-x: hidden;
         text-align: left;
     }
-
+.details-cell {
+    text-transform: capitalize;
+}
         .button-container {
             display: flex;
             width: 100%;
