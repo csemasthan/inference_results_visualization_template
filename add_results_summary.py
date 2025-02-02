@@ -53,7 +53,7 @@ def get_header():
     text-transform: capitalize;
 }
 
-.button:hover {
+.button:hover a {
     color: white;
     background-color: gray;
     text-decoration: underline;
@@ -84,10 +84,6 @@ def get_header():
             display: inline-block;
         }
 
-        .button:hover {
-            background-color: #0056b3;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
 
         .button:active {
             background-color: #003f8a;
