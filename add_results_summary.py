@@ -53,7 +53,7 @@ def get_header():
     text-transform: capitalize;
 }
 
-.button:hover a {
+a.button:hover {
     color: white;
     background-color: gray;
     text-decoration: underline;
