@@ -52,6 +52,13 @@ def get_header():
 .details-cell {
     text-transform: capitalize;
 }
+
+.button:hover {
+    color: white;
+    background-color: gray;
+    text-decoration: underline;
+}
+
         .button-container {
             display: flex;
             width: 100%;
