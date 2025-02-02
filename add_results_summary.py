@@ -165,9 +165,8 @@ def get_header():
   }
 
   .date-right {
-    font-size: 14px;
-    color: gray;
-  }
+    font-size: 18px;
+    }
 
     .table-half {
         width: 100%;
