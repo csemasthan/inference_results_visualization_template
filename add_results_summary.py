@@ -483,7 +483,7 @@ def get_accelerator_details_table(system_json):
             value = system_json[key]
             table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
     for key,value in system_json.items():
-        if not key.startswith("accelerator") or key not in main_keys:
+        if not key.startswith("accelerator") or key in main_keys:
             continue
         table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
 
