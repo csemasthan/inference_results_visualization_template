@@ -498,7 +498,7 @@ def get_cpu_details_table(system_json):
 <div class="table-container">
 <table class="table">
 """
-     for key in main_keys:
+    for key in main_keys:
         if key in system_json:
             value = system_json[key]
             table += f"""<tr><td>{key}</td><td>{value}</td></tr>"""
