@@ -267,16 +267,17 @@ display: inline-block; /* Allows background-color to apply */
     text-align: center;
     border-bottom: 2px solid #b3b6b9;
 }
-/* For perf numbers*/
-.results-table tr td:nth-child(2n+4) {
-    text-align: right;
+
+.perf{
+ text-align: right;
     padding-right: 20px;
     font-weight: bold;
 }
-.results-table tr td:nth-child(2n+3) {
-    text-align: center;
+.units{
+text-align: center;
     padding-left: 20px;
 }
+
 
 .results-table th:not(:last-child):after, .results-table tr:nth-child(n+3) td:nth-child(-n+2):not(:last-child):after {
     background-color: #b3b6b9;
@@ -610,7 +611,7 @@ def round_dict_values(input_dict):
     """
     if isinstance(input_dict, str):
         input_dict = convert_string_to_dict(input_dict)
-    return ", ".join(f"{key}: {round_to_max_5_digits(value)}" for key, value in input_dict.items())
+    return ", ".join(f"{key.replace("_", " ")}: {round_to_max_5_digits(value)}" for key, value in input_dict.items())
 
 
 # Function to convert a string to a dictionary
@@ -801,7 +802,7 @@ for details, entries in tables.items():
                         if "Server" in data[model]:
                             if division == "open":
                                 html_table += f"""<td>{round_dict_values(data[model]["Server"]["Accuracy"])}</td>"""
-                            html_table += f"""<td>{data[model]["Server"]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model]["Server"]["Performance_Result"])}</td>"""
+                            html_table += f"""<td class="units">{data[model]["Server"]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model]["Server"]["Performance_Result"])}</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
                                 html_table += scenario_missing_td
@@ -811,7 +812,7 @@ for details, entries in tables.items():
                     if "Offline" in data[model]:
                         if division == "open":
                             html_table += f"""<td>{round_dict_values(data[model]["Offline"]["Accuracy"])}</td>"""
-                        html_table += f"""<td>{data[model]["Offline"]['Performance_Units']}</td> <td>{round_to_max_5_digits(data[model]["Offline"]["Performance_Result"])}</td>"""
+                        html_table += f"""<td class="units">{data[model]["Offline"]['Performance_Units']}</td> <td class="perf">{round_to_max_5_digits(data[model]["Offline"]["Performance_Result"])}</td>"""
                     else:
                         html_table += scenario_missing_td
                     if "edge" in category:
@@ -819,7 +820,7 @@ for details, entries in tables.items():
                             scenario = "SingleStream"
                             if division == "open":
                                 html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
+                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
@@ -829,7 +830,7 @@ for details, entries in tables.items():
                             scenario = "MultiStream"
                             if division == "open":
                                 html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
-                            html_table += f"""<td>{data[model][scenario]["Performance_Units"]}</td> <td>{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
+                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
