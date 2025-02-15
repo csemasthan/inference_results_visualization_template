@@ -268,7 +268,7 @@ display: inline-block; /* Allows background-color to apply */
     border-bottom: 2px solid #b3b6b9;
 }
 
-.perf{
+.perf,.accuracy{
  text-align: right;
     padding-right: 20px;
     font-weight: bold;
@@ -276,6 +276,13 @@ display: inline-block; /* Allows background-color to apply */
 .units{
 text-align: center;
     padding-left: 20px;
+}
+.na{
+text-align: center;
+}
+.model,.acc-target {
+text-align: left;
+padding-left: 20px;
 }
 
 
@@ -769,7 +776,7 @@ for details, entries in tables.items():
             for model in models:
                         
                 if model in data:
-                    html_table += f"""<tr><td>{model}</td>"""
+                    html_table += f"""<tr><td class="model">{model}</td>"""
                     
                     #version = data[model]["Offline"]["version"]
                     acc_target = checker.MODEL_CONFIG[version]["accuracy-target"][model]
@@ -796,46 +803,46 @@ for details, entries in tables.items():
                     for item in acc_targets:
                         acc_targets_list.append(f"""{item[0]}: {round(item[1], 4)}""")
                     acc_targets_string = ", ".join(acc_targets_list)
-                    html_table += f"""<td>{acc_targets_string}</td>"""
+                    html_table += f"""<td class="acc-target">{acc_targets_string}</td>"""
 
                     if "datacenter" in category:
                         if "Server" in data[model]:
                             if division == "open":
-                                html_table += f"""<td>{round_dict_values(data[model]["Server"]["Accuracy"])}</td>"""
-                            html_table += f"""<td class="units">{data[model]["Server"]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model]["Server"]["Performance_Result"])}</td>"""
+                                html_table += f"""<td class="accuracy">{round_dict_values(data[model]["Server"]["Accuracy"])}</td>"""
+                            html_table += f"""<td class="units">{data[model]["Server"]["Performance_Units"]}</td> <td class="perf">{data[model]["Server"]["Performance_Result"]:.2f}</td>"""
                         else:
                             if "Server" in required_scenarios_datacenter: #must be open
                                 html_table += scenario_missing_td
                             else:
-                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
+                                html_table += f"""<td class="na" colspan="{colspan}"> N/A </td>"""
 
                     if "Offline" in data[model]:
                         if division == "open":
-                            html_table += f"""<td>{round_dict_values(data[model]["Offline"]["Accuracy"])}</td>"""
-                        html_table += f"""<td class="units">{data[model]["Offline"]['Performance_Units']}</td> <td class="perf">{round_to_max_5_digits(data[model]["Offline"]["Performance_Result"])}</td>"""
+                            html_table += f"""<td class="accuracy">{round_dict_values(data[model]["Offline"]["Accuracy"])}</td>"""
+                        html_table += f"""<td class="units">{data[model]["Offline"]['Performance_Units']}</td> <td class="perf">{data[model]["Offline"]["Performance_Result"]:.2f}</td>"""
                     else:
                         html_table += scenario_missing_td
                     if "edge" in category:
                         if "SingleStream" in data[model]:
                             scenario = "SingleStream"
                             if division == "open":
-                                html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
-                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
+                                html_table += f"""<td class="accuracy">{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
+                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{data[model][scenario]["Performance_Result"]:.2f}</td>"""
                         else:
                             if "SingleStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
                             else:
-                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
+                                html_table += f"""<td class="na" colspan="{colspan}"> N/A </td>"""
                         if "MultiStream" in data[model]:
                             scenario = "MultiStream"
                             if division == "open":
-                                html_table += f"""<td>{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
-                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{round_to_max_5_digits(data[model][scenario]["Performance_Result"])}</td>"""
+                                html_table += f"""<td class="accuracy">{round_dict_values(data[model][scenario]["Accuracy"])}</td>"""
+                            html_table += f"""<td class="units">{data[model][scenario]["Performance_Units"]}</td> <td class="perf">{data[model][scenario]["Performance_Result"]:.2f}</td>"""
                         else:
                             if "MultiStream" in required_scenarios_edge: #must be open
                                 html_table += scenario_missing_td
                             else:
-                                html_table += f"""<td colspan="{colspan}"> N/A </td>"""
+                                html_table += f"""<td class="na" colspan="{colspan}"> N/A </td>"""
                 else:
                     pass
                     #html_table += "<td></td> <td></td>"
