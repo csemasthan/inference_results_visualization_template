@@ -140,6 +140,13 @@ display: inline-block; /* Allows background-color to apply */
         padding: 2rem;
         margin: 0 auto;
     }
+
+    .welcome-section-wrapper2 {
+    width: 85%;
+    padding-bottom: 2.5rem;
+    margin-top: -40px;
+    margin-inline: auto;
+}
     .titlebarcontainer {
         margin-top: 6vh;
         margin-bottom: 6vh;
@@ -299,7 +306,7 @@ padding-left: 20px;
     }
 
     @media (max-width:900px) {
-        .welcome-section-wrapper {
+        .welcome-section- {
             width: 100%;
         }
         .test-details-container {
@@ -310,11 +317,11 @@ padding-left: 20px;
         .details-container .table-half {
             display: block;
         }
-        .table-half .table-wrapper:nth-of-type(odd) {
+        .table-half .table-:nth-of-type(odd) {
             margin-inline-end: initial;
             margin-bottom: 2rem;
         }
-        .table-half .table-wrapper:nth-of-type(even) {
+        .table-half .table-:nth-of-type(even) {
             margin-inline-start: initial;
         }
     }
@@ -323,7 +330,7 @@ padding-left: 20px;
             background-image: radial-gradient(circle at 100% 0%, rgb(230 157 100 / 20%) 0%, #212930 20%);
             font: 400 12px / 19px Roboto, sans-serif;
         }
-        .welcome-section-wrapper {
+        .welcome-section- {
             padding: 0;
         }
         .titlebarcontainer {
@@ -870,7 +877,7 @@ for details, entries in tables.items():
 <div class="welcome-section-wrapper">
 {header_table}
 </div>
-<div class="welcome-section-wrapper">
+<div class="welcome-section-wrapper2">
 {button_links}
 </div>
 </div>
