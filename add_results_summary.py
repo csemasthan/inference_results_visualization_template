@@ -273,12 +273,9 @@ display: inline-block; /* Allows background-color to apply */
 }
 
 .perf,.accuracy{
-    padding-right: 20px;
+    padding-right: 40px!important;
     font-weight: bold;
-    justify-content: center;  /* Centers text */
-    align-items: center;
     text-align: right;  /* Aligns numbers to the right */
-    min-width: 80px;  /* Ensures consistent column width */
 }
 .units{
 text-align: center;
@@ -289,7 +286,7 @@ text-align: center;
 }
 .model,.acc-target {
 text-align: left;
-padding-left: 20px;
+padding-left: 20px!important;
 }
 
 
