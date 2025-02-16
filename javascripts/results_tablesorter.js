@@ -968,7 +968,7 @@ function constructTable(category, division, with_power, availability, data) {
     html += `
       <tr>
       <td class="col-id headcol"> ${rid} </td>
-      <td class="col-system headcol" title="${extra_sys_info}"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a> <div class="system-summary" style="float:right"><a target="_blank" href="${system_summary_link}"> HTML Summary </a></div></td>
+      <td class="col-system headcol" title="${extra_sys_info}"> <a target="_blank" href="${system_json_link}"> ${mydata[rid].System} </a> <span class="system-summary" style="float:right"><a target="_blank" href="${system_summary_link}"> HTML Summary </a></span></td>
       <td class="col-submitter headcol"> ${mydata[rid].Submitter} </td>
       <td class="col-accelerator headcol"> ${acc} </td>
       `;
