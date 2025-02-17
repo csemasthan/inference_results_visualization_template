@@ -272,7 +272,7 @@ display: inline-block; /* Allows background-color to apply */
     border-bottom: 2px solid #b3b6b9;
 }
 
-.perf,.accuracy{
+.perf,.accuracyoff{
     padding-right: 40px!important;
     font-weight: bold;
     text-align: right;  /* Aligns numbers to the right */
