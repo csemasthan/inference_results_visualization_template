@@ -39,40 +39,60 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 
 async function fetchAndStoreData(db) {
     try {
-        const data = await $.getJSON("https://raw.githubusercontent.com/" + repo_owner + "/" + repo_name + "/" + repo_branch + "/summary_results.json");
-       
+        const token = repo_token || "";
+        const url = "https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/" + "/contents/summary_results.json?ref=" +repo_branch;
+
+        // Fetch data from GitHub API
+        const response = await fetch(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `token ${token}`,
+                "Accept": "application/vnd.github.v3.raw", // Get raw JSON file
+                "User-Agent": "MyApp"
+            }
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json(); // Convert response to JSON
+
+        console.log("Fetched data:", data); // Debugging: Log fetched data
+
         // Begin a transaction to save data in IndexedDB
         const transaction = db.transaction([objStore], "readwrite");
         const objectStore = transaction.objectStore(objStore);
 
-        for (let i = 0; i < data.length; i++) {
-            const item = data[i];
-            const request = objectStore.add(item);
+        // Store fetched data in IndexedDB
+        data.forEach((item, i) => {
+            const request = objectStore.put(item); // Use put() to prevent duplicate errors
 
-            request.onsuccess = function(event) {
-                if (i % 1000 === 0)
-                    console.log("Data has been added to your database, record:", i + 1);
+            request.onsuccess = function() {
+                if (i % 1000 === 0) {
+                    console.log("Data added/updated in IndexedDB, record:", i + 1);
+                }
             };
 
             request.onerror = function(event) {
-                console.error("Error adding data: " + event.target.errorCode);
+                console.error("Error adding record:", event.target.error);
             };
-        }
+        });
 
+        // Handle transaction completion
         return new Promise((resolve, reject) => {
             transaction.oncomplete = function() {
-                console.log("All data has been successfully added to IndexedDB.");
+                console.log("All data successfully added to IndexedDB.");
                 resolve();
             };
-
             transaction.onerror = function(event) {
-                console.error("Transaction error: " + event.target.errorCode);
-                reject(event.target.errorCode);
+                console.error("Transaction error:", event.target.error);
+                reject(event.target.error);
             };
         });
 
     } catch (error) {
-        console.error("Request Failed: ", error);
+        console.error("Request Failed:", error);
     }
 }
 
