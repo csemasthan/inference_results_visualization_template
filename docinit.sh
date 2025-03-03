@@ -69,6 +69,9 @@ python3 add_results_summary.py
 test $? -eq 0 || exit $?
 git push || (sleep $((RANDOM % 100 + 1)) && git pull --rebase && git push)
 
+git config --global user.name "mlcommons-bot"
+git config --global user.email "mlcommons-bot@users.noreply.github.com"
+
 git add '**/README.md' '**/summary.html'
 git commit -m "Added results summary"
 git push
