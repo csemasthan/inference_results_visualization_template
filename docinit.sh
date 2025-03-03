@@ -67,6 +67,8 @@ if [ ! -e inference ]; then
     test $? -eq 0 || exit $?
 fi
 
+cp summary_results.json docs/javascripts/
+
 python3 add_results_summary.py
 test $? -eq 0 || exit $?
 git push || (sleep $((RANDOM % 100 + 1)) && git pull --rebase && git push)

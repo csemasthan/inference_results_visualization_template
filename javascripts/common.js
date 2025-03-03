@@ -40,7 +40,8 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 async function fetchAndStoreData(db) {
   try {
     const token = repo_token || "";
-    const url = "https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/contents/summary_results.json?ref=" +repo_branch;
+    //const url = "https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/contents/summary_results.json?ref=" +repo_branch;
+    const url = "summary_results.json";
 
     // Fetch data from GitHub API
     const headers = {
