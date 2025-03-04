@@ -39,24 +39,11 @@ const dbName = repo_owner + "_" + repo_name + "_" + repo_branch;
 
 async function fetchAndStoreData(db) {
   try {
-    const token = repo_token || "";
-    //const url = "https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/contents/summary_results.json?ref=" +repo_branch;
     const url = "javascripts/summary_results.json";
 
-    // Fetch data from GitHub API
-    const headers = {
-      "Accept": "application/vnd.github.v3.raw", // Get raw JSON file
-      "User-Agent": "MyApp"
-    };
-
-    // Only add Authorization if a token is provided
-    if (token != "") {
-      headers["Authorization"] = `token ${token}`;
-    }
 
     const response = await fetch(url, {
       method: "GET",
-      headers: headers
     });
 
     if (!response.ok) {

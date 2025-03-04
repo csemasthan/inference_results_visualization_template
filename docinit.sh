@@ -15,7 +15,6 @@ fi
 repo_owner=${INFERENCE_RESULTS_REPO_OWNER:-mlcommons}
 repo_branch=${INFERENCE_RESULTS_REPO_BRANCH:-main}
 repo_name=${INFERENCE_RESULTS_REPO_NAME:-inference_results_${INFERENCE_RESULTS_VERSION}}
-repo_token=${INFERENCE_RESULTS_REPO_TOKEN:-""}
 ver_num=$(cat dbversion)
 let ver_num++
 
@@ -27,7 +26,6 @@ if [ ! -e docs/javascripts/config.js ]; then
          echo "var repo_owner=\"${repo_owner}\";" >> docs/javascripts/config.js;
          echo "var repo_branch=\"${repo_branch}\";" >> docs/javascripts/config.js;
          echo "var repo_name=\"${repo_name}\";" >> docs/javascripts/config.js;
-         echo "var repo_token=\"${repo_token}\";" >> docs/javascripts/config.js;
          echo "const dbVersion =\"${ver_num}\";" >> docs/javascripts/config.js;
          echo "const default_category =\"${default_category}\";" >> docs/javascripts/config.js;
          echo "const default_division =\"${default_division}\";" >> docs/javascripts/config.js;
