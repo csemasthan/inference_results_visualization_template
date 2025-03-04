@@ -41,7 +41,7 @@ async function fetchAndStoreData(db) {
   try {
     const token = repo_token || "";
     //const url = "https://api.github.com/repos/" + repo_owner + "/" + repo_name + "/contents/summary_results.json?ref=" +repo_branch;
-    const url = "summary_results.json";
+    const url = "javascripts/summary_results.json";
 
     // Fetch data from GitHub API
     const headers = {
