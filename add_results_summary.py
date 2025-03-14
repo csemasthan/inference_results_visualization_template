@@ -848,8 +848,7 @@ for details, entries in tables.items():
                                 html_table += scenario_missing_td
                             else:
                                 html_table += f"""<td class="na" colspan="{colspan}"> N/A </td>"""
-                else:
-                    pass
+                
                     #html_table += "<td></td> <td></td>"
                     #html_table += "<td></td> <td></td>"
                     #html_table += "</tr>"
