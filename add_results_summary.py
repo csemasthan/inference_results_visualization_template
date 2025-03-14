@@ -739,9 +739,9 @@ for entry in data:
             tables[details][category][entry['Category']] = {}
 
         if entry['Model'] not in tables[details][category][entry['Category']]:
-            tables[details][category][entry['Category']] [entry['Model']] = {}
-        if entry['Scenario'] not in tables[details][category][entry['Category']][entry['Model']]:
-            tables[details][category][entry['Category']][entry['Model']][entry['Scenario']] = entry
+            tables[details][category][entry['Category']] [entry['UsedModel']] = {}
+        if entry['Scenario'] not in tables[details][category][entry['Category']][entry['UsedModel']]:
+            tables[details][category][entry['Category']][entry['UsedModel']][entry['Scenario']] = entry
 
 # Now you can format each group in 'tables' as a markdown table
 for details, entries in tables.items():
@@ -777,19 +777,20 @@ for details, entries in tables.items():
                 colspan="2"
                 scenario_missing_td = "<td></td><td></td>"
 
-            for model in models:
+            for model in data:
                         
-                if model in data:
+                #if model in data:
+                    mlperf_model = data[model]["Offline"]["Model"]
                     html_table += f"""<tr><td class="model">{model}</td>"""
                     
                     #version = data[model]["Offline"]["version"]
-                    acc_target = checker.MODEL_CONFIG[version]["accuracy-target"][model]
-                    if model in checker.MODEL_CONFIG[version]["required-scenarios-datacenter"]:
-                        required_scenarios_datacenter = checker.MODEL_CONFIG[version]["required-scenarios-datacenter"][model]
+                    acc_target = checker.MODEL_CONFIG[version]["accuracy-target"][mlperf_model]
+                    if mlperf_model in checker.MODEL_CONFIG[version]["required-scenarios-datacenter"]:
+                        required_scenarios_datacenter = checker.MODEL_CONFIG[version]["required-scenarios-datacenter"][mlperf_model]
                     else:
                         required_scenarios_datacenter = []
-                    if model in checker.MODEL_CONFIG[version]["required-scenarios-edge"]:
-                        required_scenarios_edge = checker.MODEL_CONFIG[version]["required-scenarios-edge"][model]
+                    if mlperf_model in checker.MODEL_CONFIG[version]["required-scenarios-edge"]:
+                        required_scenarios_edge = checker.MODEL_CONFIG[version]["required-scenarios-edge"][mlperf_model]
                     else:
                         required_scenarios_edge = []
 
